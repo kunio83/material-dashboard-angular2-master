@@ -1,1 +1,21 @@
-<p>homen works!</p>
+<h1>Esto es Homen</h1>
+
+<form [formGroup]="contactForm" (ngSubmit)="submit()">
+ 
+    <p>
+     
+      <select formControlName="country" (change)="filterProvincias();">
+        <option [ngValue]="null" disabled>Select Country</option>
+        <option *ngFor="let country of countries" [ngValue]="country.id">{{country.name}}</option>
+      </select>
+    </p>
+    <p>
+      <select formControlName="state" onchange="alert(value);">
+        <option [ngValue]="null" disabled>Select State</option>
+        <option *ngFor="let state of currentCountry.states" [ngValue]="state.id">{{state.name}}</option>
+      </select>
+    </p> 
+      <button type="submit">Submit</button>
+    
+     
+</form>

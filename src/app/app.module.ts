@@ -8,6 +8,7 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { HomeService } from './services/home.service';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { HomeService } from './services/home.service';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
+    HomeComponent,
 
   ],
   providers: [HomeService],
