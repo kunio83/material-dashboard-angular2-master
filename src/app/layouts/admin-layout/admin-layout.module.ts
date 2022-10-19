@@ -18,6 +18,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import { HomenComponent } from 'app/homen/homen.component';
+import { PlatoComponent } from 'app/plato/plato.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { HomenComponent } from 'app/homen/homen.component';
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
-    HomenComponent
+    HomenComponent,
+    PlatoComponent
   ]
 })
 

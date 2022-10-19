@@ -23,7 +23,7 @@ import { HomeComponent } from './home/home.component';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    HomeComponent,
+    HomeComponent
 
   ],
   providers: [HomeService],
