@@ -4,24 +4,25 @@ import { Country } from 'app/models/country';
 import { State } from 'app/models/state';
 import { City } from 'app/models/city';
 import { observable, Observable } from 'rxjs';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
-  baseUrl: string = 'https://optirestapi-v1.azurewebsites.net/api/';
+  //baseUrl: string = 'https://optirestapi-v1.azurewebsites.net/api/';
 
   constructor(private httpClient: HttpClient) { }
 
   getCountry(countryId: number): Observable<Country>{
-    return this.httpClient.get<Country>(this.baseUrl + 'country/' + countryId);
+    return this.httpClient.get<Country>(environment.apiBaseURI + 'country/' + countryId);
   }
 
   getCountries(): Observable<Country[]>{
-    return this.httpClient.get<Country[]>(this.baseUrl + 'country/');
+    return this.httpClient.get<Country[]>(environment.apiBaseURI+ 'country/');
   }
 
   getCities(stateId: number): Observable<State>{
-    return this.httpClient.get<State>(this.baseUrl + 'state/' + stateId);
+    return this.httpClient.get<State>(environment.apiBaseURI + 'state/' + stateId);
   }
 }

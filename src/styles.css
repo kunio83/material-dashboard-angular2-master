@@ -1,1 +1,91 @@
 /* You can add global styles to this file, and also import other style files */
+.grid-table
+{
+	display:table;
+	width: 100%;
+}
+.thead
+{
+	display:table-header-group;
+	font-weight:bold;
+	border-bottom: 1px solid black;
+    text-align: center;
+    background-color: #f0f8ff;
+}
+.tbody
+{
+	display:table-row-group;
+}
+.tr
+{
+	display:table-row;
+	
+}
+.td
+{
+	display:table-cell;
+	padding: 10px 1px 1px 5px;
+}
+.thead div.tr div.td:last-child{
+    background-color: #fff;
+}
+i:hover{
+	cursor: pointer;
+}
+
+input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
+	border-color: #dc3545;
+}
+
+
+.elementToFadeInAndOut {
+    -webkit-animation: fadeinout 2s linear forwards !important;
+    animation: fadeinout 2s linear forwards !important;
+    opacity: 0;
+}
+
+
+
+
+
+@-webkit-keyframes fadeinout {
+  50% { opacity: 1; }
+}
+
+@keyframes fadeinout {
+  50% { opacity: 1;}
+}
+
+.form-check-input {
+    margin-left: 0px !important;
+}
+
+.notifdiv{
+	background-color: #ffffff4d;
+	margin-top: -10px px;
+	position: absolute;
+	bottom: 40px;
+	right: 20px;
+	z-index: 4;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+
+.controlInactive{
+	color: #c7c2c2;
+}
+
+.titCategory{
+    background: linear-gradient(60deg, #ef5350, #e53935);
+    border-radius: 3px;
+    padding: 5px 5px 5px 15px;
+    color: #fff;
+    width: 100%;
+    margin-left: -10px;
+}
+
+.form-check .form-check-label {
+	position: unset;
+}
+

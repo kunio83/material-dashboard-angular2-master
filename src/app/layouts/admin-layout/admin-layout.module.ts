@@ -18,7 +18,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import { HomenComponent } from 'app/homen/homen.component';
-import { PlatoComponent } from 'app/plato/plato.component';
+import { CategoriaComponent } from 'app/categoria/categoria.component';
+import { MenuComponent } from 'app/menu/menu.component';
+import { UsuarioComponent } from 'app/usuario/usuario.component';
 
 @NgModule({
   imports: [
@@ -43,7 +45,9 @@ import { PlatoComponent } from 'app/plato/plato.component';
     NotificationsComponent,
     UpgradeComponent,
     HomenComponent,
-    PlatoComponent
+    CategoriaComponent,
+    MenuComponent,
+    UsuarioComponent
   ]
 })
 
