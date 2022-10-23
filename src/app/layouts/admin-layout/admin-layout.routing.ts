@@ -12,6 +12,8 @@ import { HomenComponent } from 'app/homen/homen.component';
 import { CategoriaComponent } from 'app/categoria/categoria.component';
 import { MenuComponent } from 'app/menu/menu.component';
 import { UsuarioComponent } from 'app/usuario/usuario.component';
+import { AreaComponent } from 'app/area/area.component';
+import { CocinaComponent } from 'app/cocina/cocina.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -60,6 +62,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'usuario',      component: UsuarioComponent },
     { path: 'categoria',          component: CategoriaComponent },
     { path: 'menu',          component: MenuComponent },
+    { path: 'area',     component: AreaComponent },
+    { path: 'cocina',     component: CocinaComponent },
     { path: 'dashboard',      component: DashboardComponent },
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'table-list',     component: TableListComponent },
