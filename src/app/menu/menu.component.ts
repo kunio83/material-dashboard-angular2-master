@@ -90,7 +90,6 @@ export class MenuComponent implements OnInit {
         (res: any) => {
           this.showNotification('update');
         });
-        console.log("LISTA CATEGORY: ", this.categoryList);
     }
   }
 

@@ -31,6 +31,4 @@ export class MenuService {
     return this.httpClient.get(environment.apiBaseURI + 'ItemCategory?tenantId=' + tenantId);
   }
 
-
-
 }
