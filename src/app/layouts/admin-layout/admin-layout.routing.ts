@@ -14,6 +14,8 @@ import { MenuComponent } from 'app/menu/menu.component';
 import { UsuarioComponent } from 'app/usuario/usuario.component';
 import { AreaComponent } from 'app/area/area.component';
 import { CocinaComponent } from 'app/cocina/cocina.component';
+import { MesaComponent } from 'app/mesa/mesa.component';
+import { MesaServComponent } from 'app/mesa-serv/mesa-serv.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -63,6 +65,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'categoria',          component: CategoriaComponent },
     { path: 'menu',          component: MenuComponent },
     { path: 'area',     component: AreaComponent },
+    { path: 'mesa',     component: MesaComponent },
+    { path: 'mesa-servicio',     component: MesaServComponent },
     { path: 'cocina',     component: CocinaComponent },
     { path: 'dashboard',      component: DashboardComponent },
     { path: 'user-profile',   component: UserProfileComponent },

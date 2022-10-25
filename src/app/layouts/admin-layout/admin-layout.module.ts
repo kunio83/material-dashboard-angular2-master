@@ -23,6 +23,8 @@ import { MenuComponent } from 'app/menu/menu.component';
 import { UsuarioComponent } from 'app/usuario/usuario.component';
 import { AreaComponent } from 'app/area/area.component';
 import { CocinaComponent } from 'app/cocina/cocina.component';
+import { MesaComponent } from 'app/mesa/mesa.component';
+import { MesaServComponent } from 'app/mesa-serv/mesa-serv.component';
 
 @NgModule({
   imports: [
@@ -52,6 +54,8 @@ import { CocinaComponent } from 'app/cocina/cocina.component';
     UsuarioComponent,
     AreaComponent,
     CocinaComponent,
+    MesaComponent,
+    MesaServComponent
   ]
 })
 

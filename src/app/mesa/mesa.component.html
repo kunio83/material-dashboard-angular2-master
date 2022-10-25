@@ -1,0 +1,153 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="notifdiv">
+            <span *ngIf="notification" class="elementToFadeInAndOut">
+                <i class="fa fa-check-circle {{ notification.class }}"></i>
+                {{ notification.message }}
+            </span>
+        </div>
+        <div class="row" style="text-align: center;">
+
+            <div class="card">
+                <div class="card-header card-header-tabs card-header-danger">
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                            <span class="nav-tabs-title">Areas:</span>
+                            <ul class="nav nav-tabs" data-tabs="tabs">
+                                <ng-container *ngFor="let area of areaList, let i = index">
+                                    <li class="nav-item">
+                                        <a mat-button class="nav-link" href="{{ '#t' + area.id }}" data-toggle="tab"
+                                            (click)="selectArea(area.id)" [ngClass]="(i == 0? 'active' : '')">
+                                            <i class="material-icons">domain</i> {{ area.name }}
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <ng-container *ngFor="let area of areaList, let i = index">
+                            <div class="tab-pane" id="{{ 't' + area.id }}" [ngClass]="(i == 0? 'active' : '')">
+                                <div>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="card">
+                                                <div class="card-header card-header-tabs card-header-primary">
+                                                    <h4 class="card-title">Mesas</h4>
+                                                </div>
+                                                <div class="card-body table-responsive">
+                                                    <div class="grid-table">
+                                                        <div class="thead">
+                                                            <div class="tr">
+                                                                <div class="td">Nombre</div>
+                                                                <div class="td">largo</div>
+                                                                <div class="td">Ancho</div>
+                                                                <div class="td">Forma</div>
+
+                                                                <div class="td">PosX</div>
+                                                                <div class="td">PosY</div>
+
+                                                                <div class="td">
+                                                                    <button class="btn btn-outline-success btn-sm"
+                                                                        (click)="addItemForm()">
+                                                                        <i class="fa fa-plus"></i> Nuevo
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tbody">
+                                                            <ng-container
+                                                                *ngFor="let fg of itemForms.controls; let i = index">
+                                                                <form *ngIf="fg.get('areaId').value == areaSelected"
+                                                                    class="tr" [formGroup]="fg"
+                                                                    (submit)="recordSubmit(fg)">
+                                                                    <div class="td">
+                                                                        <input class="form-control"
+                                                                            formControlName="name">
+                                                                    </div>
+                                                                    <div class="td">
+                                                                        <input class="form-control"
+                                                                            formControlName="length" type="number" min="1" max="{{ areaSelectedLength  - fg.get('posX').value}}">
+                                                                    </div>
+                                                                    <div class="td">
+                                                                        <input class="form-control"
+                                                                            formControlName="width" type="number" min="1" max="{{ areaSelectedWidth - fg.get('posY').value}}">
+                                                                    </div>
+
+                                                                    <div class="td">
+                                                                        <select class="form-control"
+                                                                            formControlName="shapeId">
+                                                                            <option *ngFor="let shape of shapeList"
+                                                                                value="{{ shape.id }}">
+                                                                                {{ shape.name }}
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+
+
+                                                                    <div class="td">
+                                                                        <input class="form-control"
+                                                                            formControlName="posX" type="number" min="1" max="{{ areaSelectedLength - 1}}">
+                                                                    </div>
+                                                                    <div class="td">
+                                                                        <input class="form-control"
+                                                                            formControlName="posY" type="number" min="1" max="{{ areaSelectedWidth - 1}}">
+                                                                    </div>
+
+
+                                                                    <div class="td">
+                                                                        <button type="submit" class="btn btn-sm"
+                                                                            [disabled]="fg.invalid"
+                                                                            [ngClass]="(fg.get('id').value > 0 ? 'btn-outline-info':'btn-success')">
+                                                                            <i class="fa fa-floppy-o"></i>
+                                                                        </button>&nbsp;
+                                                                        <button class="btn btn-outline-danger btn-sm"
+                                                                            (click)="onDelete(fg.get('id').value,i)">
+                                                                            <i class="fa fa-trash"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                </form>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7" style="padding:0">
+                                            <div id="mesas" class="fndmesas"
+                                            [style.background-size]="factMesas + 'px'"
+                                            [style.background-position-x]="-factMesas/2 + 'px'"
+                                            [style.background-position-y]="-factMesas/2 + 'px'"
+                                            >
+                                                <div class="contmesas"
+                                                    [style.height]="areaSelectedWidth * factMesas + 'px'">
+                                                    <ng-container *ngFor="let fg of itemForms.controls; let i = index">
+                                                        <div class="mesa" *ngIf="fg.get('areaId').value == areaSelected"
+                                                            [style.left]="fg.get('posX').value * factMesas + 'px'"
+                                                            [style.top]="fg.get('posY').value * factMesas + 'px'"
+                                                            [style.width]="fg.get('length').value * factMesas + 'px'"
+                                                            [style.height]="fg.get('width').value * factMesas + 'px'"
+                                                            [ngClass]="(fg.get('shapeId').value != 2 ? 'mesa-cuadrada' : 'mesa-redonda')">
+
+                                                            <div class="mesa-title">
+                                                                {{ fg.get('name').value }}
+                                                            </div>
+                                                        </div>
+                                                    </ng-container>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

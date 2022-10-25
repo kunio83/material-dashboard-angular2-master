@@ -11,6 +11,10 @@ export class UserService {
 
   constructor(private httpClient : HttpClient ) { }
 
+  getUserLista(tenantId : number){
+    return this.httpClient.get(environment.apiBaseURI + 'User/usersByTenant/' + tenantId);
+  }
+
   getUsers(tenantId : number): Observable<User[]>{
     return this.httpClient.get<User[]>(environment.apiBaseURI + 'User/usersByTenant/' + tenantId);
   }

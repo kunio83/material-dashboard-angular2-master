@@ -16,13 +16,13 @@ export class MenuComponent implements OnInit {
   categoryList: [];
   kitchenList: [];
   notification = null;
-  utmCatId = 0;
 
 
   constructor(private fb : FormBuilder,
     private menuService : MenuService,
     private categoriaService : CategoriaService,
-    private cocinaService : CocinaService) { }
+    private cocinaService : CocinaService
+  ) { }
 
 
 
@@ -121,6 +121,6 @@ export class MenuComponent implements OnInit {
     }
     setTimeout(() => {
       this.notification = null;
-    },2000);
+    },3000);
   }
 }

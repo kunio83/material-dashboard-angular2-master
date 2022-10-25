@@ -11,6 +11,10 @@ export class AreaService {
 
   constructor( private httpClient: HttpClient) { }
 
+  getAreaLista(tenantId: number){
+    return this.httpClient.get(environment.apiBaseURI + 'Area?tenantId=' + tenantId);
+  }
+
   getAreas(tenantId: number) : Observable<Area[]>{
     return this.httpClient.get<Area[]>(environment.apiBaseURI + 'Area?tenantId=' + tenantId);
   }
