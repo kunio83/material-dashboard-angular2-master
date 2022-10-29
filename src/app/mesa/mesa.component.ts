@@ -163,9 +163,9 @@ export class MesaComponent implements OnInit {
     }
 
 
-  ngAfterViewChecked() {
+  /*ngAfterViewChecked() {
     let clientWidth = document.getElementById('mesas').clientWidth;
     this.factMesas = clientWidth / this.areaSelectedLength;    
-  }
+  }*/
 
 }
