@@ -24,7 +24,7 @@
 .td
 {
 	display:table-cell;
-	padding: 10px 1px 1px 5px;
+	padding: 10px 1px 10px 5px;
 }
 .thead div.tr div.td:last-child{
     background-color: #fff;
