@@ -16,6 +16,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/mesa', title: 'Mesas',  icon:'table_bar', class: '' },
     { path: '/mesa-servicio', title: 'Asignación de Mesas',  icon:'dinner_dining', class: '' },
     { path: '/cocina', title: 'Cocinas',  icon:'food_bank', class: '' },
+    { path: '/servicios', title: 'Mesas activas',  icon:'dinner_dining', class: '' },
     { path: '/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '' },
     { path: '/user-profile', title: 'User Profile',  icon:'person', class: '' },
     { path: '/table-list', title: 'Table List',  icon:'content_paste', class: '' },
