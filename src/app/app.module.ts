@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { HomeService } from './services/home.service';
 import { HomeComponent } from './home/home.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { HomeComponent } from './home/home.component';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    ToastrModule.forRoot()
   ],
   declarations: [
     AppComponent,

@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@aspnet/signalr';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
+import { NotificationService } from './notification.service';
+import { Notification } from '../models/notification';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +14,10 @@ export class SignalrService {
   private appsConnectedBehaviorSubject: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
 
-  constructor() { }
+  constructor(
+    private toastr: ToastrService,
+    private notificationService: NotificationService
+  ) { }
 
   startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
@@ -35,8 +42,11 @@ askServer = () => {
 
   askServerListener = () => {
     this.hubConnection.on('askServerResponse', (message) => {
-      //console.log(message);
-      alert(message);
+      this.toastr.success(message);
+
+      let notification = new Notification(uuidv4(), 'Some title', message, new Date(), 'Some type', false);
+
+      this.notificationService.saveNotificationToStorage(notification);
     });
   }
 

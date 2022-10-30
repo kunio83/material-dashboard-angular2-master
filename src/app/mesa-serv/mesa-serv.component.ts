@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Area } from 'app/models/area';
 import { AreaService } from 'app/services/area.service';
 import { MesaEstadoService } from 'app/services/mesa-estado.service';
@@ -15,7 +15,7 @@ import { environment } from 'environments/environment';
 })
 export class MesaServComponent implements OnInit {
 
-  itemForms: FormArray = this.fb.array([]);
+  itemForms: UntypedFormArray = this.fb.array([]);
   userList: [];
   stateList: [];
   shapeList: [];
@@ -28,7 +28,7 @@ export class MesaServComponent implements OnInit {
   factMesas = 0;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private mesaService: MesaService,
     private userService: UserService,
     private mesaEstadoService: MesaEstadoService,
@@ -77,7 +77,7 @@ export class MesaServComponent implements OnInit {
   }
 
 
-  recordSubmit(fg: FormGroup) {
+  recordSubmit(fg: UntypedFormGroup) {
     if (fg.value.id == 0)
       this.mesaService.postMesa(fg.value).subscribe(
         (res: any) => {

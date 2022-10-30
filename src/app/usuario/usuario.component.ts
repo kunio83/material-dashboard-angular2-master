@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { UserService } from 'app/services/user.service';
 import { environment } from 'environments/environment';
 
@@ -9,10 +9,10 @@ import { environment } from 'environments/environment';
   styleUrls: ['./usuario.component.css']
 })
 export class UsuarioComponent implements OnInit {
-  userForms: FormArray = this.fb.array([]);
+  userForms: UntypedFormArray = this.fb.array([]);
   notification = null;
 
-  constructor(private fb: FormBuilder,
+  constructor(private fb: UntypedFormBuilder,
     private userService: UserService) { }
     
   ngOnInit(): void {
@@ -58,7 +58,7 @@ export class UsuarioComponent implements OnInit {
     console.log(this.userForms);
   }
 
-  recordSubmit(fg: FormGroup) {
+  recordSubmit(fg: UntypedFormGroup) {
     if (fg.value.id == '0') {
       this.userService.postUser(fg.value).subscribe(
         (res: any) => {
