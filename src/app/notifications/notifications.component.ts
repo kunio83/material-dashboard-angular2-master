@@ -19,7 +19,13 @@ export class NotificationsComponent implements OnInit {
 
   ngOnInit() {
     this.notificationService.getNotifications().subscribe(notifications => {
-      this.notifications = notifications;
+
+    // ordenando notificaciones por fecha de creación de forma descendente
+    const sortedDesc = notifications.sort(
+      (objA: Notification, objB: Notification) => new Date(objB.date).getTime() - new Date(objA.date).getTime()
+      );
+    
+    this.notifications = sortedDesc as Notification[];
     });
   }
   deleteNotification(notification: Notification) {

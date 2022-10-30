@@ -55,10 +55,14 @@
     </ul>
   </div>
     <ul class="nav">
-        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item {{existUnreadedNotifications && menuItem.title == 'Notifications' ? 'unreaded' : ''}}">
             <a class="nav-link" [routerLink]="[menuItem.path]">
-                <i class="material-icons">{{menuItem.icon}}</i>
-                <p>{{menuItem.title}} <i class="material-icons" [hidden]="!(existUnreadedNotifications && menuItem.title == 'Notifications')">error_outline</i></p>
+                <div>
+                    <i class="material-icons">{{menuItem.icon}}</i>
+                    <i class="material-icons unreaded-icon" width="20px" [hidden]="!(existUnreadedNotifications && menuItem.title == 'Notifications')">error_outline</i>
+                </div>
+                <p>{{menuItem.title}} </p>
+                <!-- <i class="material-icons unreaded-icon" width="20px" [hidden]="!(existUnreadedNotifications && menuItem.title == 'Notifications')">error_outline</i> -->
                 
             </a>
         </li>
