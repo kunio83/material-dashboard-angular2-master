@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Country } from 'app/models/country';
+import { State } from 'app/models/state';
 import { HomeService } from 'app/services/home.service';
 
 @Component({
@@ -11,11 +12,12 @@ import { HomeService } from 'app/services/home.service';
 export class HomenComponent implements OnInit {
   countries: Country[];
   currentCountry: Country = new Country;
-  contactForm:FormGroup;
+  currentState: State = new State;
+  contactForm:UntypedFormGroup;
 
   constructor(
     private homeService: HomeService,
-    private formBuilder:FormBuilder
+    private formBuilder:UntypedFormBuilder
     ) { }
 
   ngOnInit(): void {
@@ -24,11 +26,13 @@ export class HomenComponent implements OnInit {
       {
         next: data => {
           this.countries = data;
+          console.log(this.countries);
         }
       }
     )
     this.contactForm = this.formBuilder.group({
-            country: [null]
+            country: [null],
+            state: [null]
     }); 
   }
 
@@ -42,6 +46,18 @@ export class HomenComponent implements OnInit {
       }
     )
   }
+
+  filterCities = (): void => {
+    this.homeService.getCities(this.contactForm.controls.state.value).subscribe(
+      {
+        next: data => {
+          this.currentState = data;
+        }
+      }
+    )
+  }
+
+
 
 
  

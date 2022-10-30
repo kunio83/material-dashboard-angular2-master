@@ -1,0 +1,108 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="notifdiv">
+            <span *ngIf="notification" class="elementToFadeInAndOut">
+                <i class="fa fa-check-circle {{ notification.class }}"></i>
+                {{ notification.message }}
+            </span>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Platos</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="grid-table">
+                            <div class="thead">
+                                <div class="tr">
+                                    <div class="td" style="width: 100px;">Codigo</div>
+                                    <div class="td">Categoria</div>
+                                    <div class="td">Cocina</div>
+                                    <div class="td">Titulo</div>
+                                    <div class="td">Descripcion</div>
+                                    <div class="td" style="width: 120px;">Precio</div>
+                                    <div class="td">Activo</div>
+                                    <div class="td" style="width: 130px;">
+                                        <button class="btn btn-outline-success" (click)="addItemForm()">
+                                            <i class="fa fa-plus"></i> Nuevo
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tbody">
+                                <ng-container *ngFor="let fg of itemForms.controls; let i = index">
+                                        <ng-container *ngIf="i>0">
+                                            <ng-container *ngIf="itemForms.controls[i-1].get('itemCategoryId').value != fg.get('itemCategoryId').value">
+                                                <ng-container *ngFor="let cat of categoryList">
+                                                    <ng-container *ngIf="cat.id == fg.get('itemCategoryId').value">
+                                                        <td colspan="9" style="padding: 5px;">
+                                                            <div class="titCategory">
+                                                                {{ cat.name }}
+                                                            </div>
+                                                        </td>
+                                                    </ng-container>
+                                                </ng-container>
+                                            </ng-container>
+                                        </ng-container>
+                                    <form class="tr" [formGroup]="fg" (submit)="recordSubmit(fg)">
+                                        <div class="td">
+                                            <input class="form-control" formControlName="code"
+                                            [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')">
+                                        </div>
+                                        <div class="td">
+                                            <select class="form-control" formControlName="itemCategoryId" 
+                                            [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')">
+                                                <option *ngFor="let cat of categoryList" value="{{ cat.id }}">
+                                                    {{ cat.name }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="td">
+                                            <select class="form-control" formControlName="kitchenId"
+                                            [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')">
+                                                <option *ngFor="let kitchen of kitchenList" value="{{ kitchen.id }}">
+                                                    {{ kitchen.name }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="td">
+                                            <input class="form-control" formControlName="title"
+                                            [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')">
+                                        </div>
+                                        <div class="td">
+                                            <input class="form-control" formControlName="summary"
+                                            [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')">
+                                        </div>
+                                        <div class="td" >
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text">$</span>
+                                                <input class="form-control" formControlName="price" style="text-align:right"
+                                                [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')">
+                                            </div>
+                                        </div>
+                                        <div class="td" style="text-align:center">                                        
+                                            <input class="form-check-input" type="checkbox" value="" formControlName="active">
+                                        </div>
+                                        <div class="td" style="text-align: center;">
+                                            <button type="submit" class="btn btn-sm"
+                                            [disabled]="fg.invalid"
+                                            [ngClass]="(fg.get('id').value > 0 ? 'btn-outline-info':'btn-success')">
+                                                <i class="fa fa-floppy-o"></i>
+                                            </button>&nbsp;
+                                            <button class="btn btn-outline-danger btn-sm" (click)="onDelete(fg.get('id').value,i)"   >
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </ng-container>
+                            </div>  
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  

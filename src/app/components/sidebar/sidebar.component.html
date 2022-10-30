@@ -58,7 +58,8 @@
         <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
             <a class="nav-link" [routerLink]="[menuItem.path]">
                 <i class="material-icons">{{menuItem.icon}}</i>
-                <p>{{menuItem.title}}</p>
+                <p>{{menuItem.title}} <i class="material-icons" [hidden]="!(existUnreadedNotifications && menuItem.title == 'Notifications')">error_outline</i></p>
+                
             </a>
         </li>
     </ul>

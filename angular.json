@@ -23,7 +23,8 @@
             "styles": [
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "src/assets/scss/material-dashboard.scss",
-              "src/assets/css/demo.css"
+              "src/assets/css/demo.css",
+              "src/styles.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
@@ -123,7 +124,8 @@
             "styles": [
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "src/assets/scss/material-dashboard.scss",
-              "src/assets/css/demo.css"
+              "src/assets/css/demo.css",
+              "src/styles.css"
             ],
             "assets": [
               "src/assets",
@@ -167,12 +169,7 @@
       }
     }
   },
-  "defaultProject": "material-dashboard-angular",
   "schematics": {
-    // "@schematics/angular:component": {
-    //   // "prefix": "app",
-    //   "styleext": "scss"
-    // },
     "@schematics/angular:directive": {
       "prefix": "app"
     }

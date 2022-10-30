@@ -1,0 +1,121 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="notifdiv">
+            <span *ngIf="notification" class="elementToFadeInAndOut">
+                <i class="fa fa-check-circle {{ notification.class }}"></i>
+                {{ notification.message }}
+            </span>
+        </div>
+        <div class="row" style="text-align: center;">
+
+            <div class="card">
+                <div class="card-header card-header-tabs card-header-danger">
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                            <span class="nav-tabs-title">Areas:</span>
+                            <ul class="nav nav-tabs" data-tabs="tabs">
+                                <ng-container *ngFor="let area of areaList, let i = index">
+                                    <li class="nav-item">
+                                        <a mat-button class="nav-link" href="{{ '#t' + area.id }}" data-toggle="tab"
+                                            (click)="selectArea(area.id)" [ngClass]="(i == 0? 'active' : '')">
+                                            <i class="material-icons">domain</i> {{ area.name }}
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <ng-container *ngFor="let area of areaList, let i = index">
+                            <div class="tab-pane" id="{{ 't' + area.id }}" [ngClass]="(i == 0? 'active' : '')">
+                                <div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <ng-container *ngFor="let fg of itemForms.controls; let i = index">
+                                                <form *ngIf="fg.get('id').value == mesaSelected" [formGroup]="fg"
+                                                    (submit)="recordSubmit(fg)">
+                                                    <div class="form-group">
+                                                        <label>Mesa</label>
+                                                        <input class="form-control" formControlName="name">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Estado</label>
+                                                        <select class="form-control" formControlName="stateId">
+                                                            <option *ngFor="let state of stateList" [value]="state.id">
+                                                                {{ state.name }}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Mozo Asignado</label>
+                                                        <select class="form-control" formControlName="userId">
+                                                            <option *ngFor="let user of userList" [value]="user.id">
+                                                                {{ user.username }}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-sm" [disabled]="fg.invalid"
+                                                            [ngClass]="(fg.get('id').value > 0 ? 'btn-outline-info':'btn-success')">
+                                                            <i class="fa fa-floppy-o"></i>
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </ng-container>
+                                        </div>
+                                        <div class="col" style="padding:0">
+                                            <div id="mesas" class="fndmesas" [style.background-size]="factMesas + 'px'"
+                                                [style.background-position-x]="-factMesas/2 + 'px'"
+                                                [style.background-position-y]="-factMesas/2 + 'px'">
+
+                                                <div class="contmesas"
+                                                    [style.height]="areaSelectedWidth * factMesas + 'px'">
+                                                    <ng-container *ngFor="let fg of itemForms.controls; let i = index">
+
+                                                        <a href="#/mesa-servicio" class="link">
+                                                            <div class="mesa"
+                                                                *ngIf="fg.get('areaId').value == areaSelected"
+                                                                [style.left]="fg.get('posX').value * factMesas + 'px'"
+                                                                [style.top]="fg.get('posY').value * factMesas + 'px'"
+                                                                [style.width]="fg.get('length').value * factMesas + 'px'"
+                                                                [style.height]="fg.get('width').value * factMesas + 'px'"
+                                                                [ngClass]="(fg.get('shapeId').value != 2 ? 'mesa-cuadrada' : 'mesa-redonda')"
+                                                                [ngClass]="(fg.get('stateId').value == 1 ? 'mesa-disponible' : (fg.get('stateId').value == 2 ? 'mesa-ocupada' : 'mesa-cerrada'))"
+                                                                (click)="selectMesa(fg.get('id').value)">
+
+
+                                                                <div class="mesa-title">
+                                                                    {{ fg.get('name').value }}
+                                                                </div>
+                                                                <div class="mesa-user">
+                                                                    
+                                                                    <ng-container *ngFor="let user of userList" [value]="user.id">
+                                                                        <div *ngIf = "fg.get('userId').value == user.id">
+                                                                            <i class="fa fa-user" >&nbsp;{{ user.username }}</i>
+                                                                        </div>
+                                                                    </ng-container>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </ng-container>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

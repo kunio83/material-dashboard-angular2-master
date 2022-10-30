@@ -1,0 +1,97 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="notifdiv">
+            <span *ngIf="notification" class="elementToFadeInAndOut">
+                <i class="fa fa-check-circle {{ notification.class }}"></i>
+                {{ notification.message }}
+            </span>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-tabs card-header-primary">
+                        <h4 class="card-title">Usuarios</h4>
+                    </div>
+                    <div class="card-body table-responsive">
+                        <div class="grid-table">
+                            <div class="thead">
+                                <div class="tr">
+                                    <div class="td">Usuario</div>
+                                    <div class="td">Email</div>
+                                    <div class="td">Password</div>
+                                    <div class="td">Nombres</div>
+                                    <div class="td">Apellido</div>
+                                    <div class="td">Role</div>
+                                    <div class="td">Activo</div>
+                                    <div class="td">
+                                        <button class="btn btn-outline-success btn-sm" (click)="addUserForm()">
+                                            <i class="fa fa-plus"></i> Nuevo
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>    
+                            <div class="tbody">
+                                <ng-container *ngFor="let fg of userForms.controls; let i = index">
+                                    <form class="tr" [formGroup]="fg" (submit)="recordSubmit(fg)">
+                                        <div class="td">
+                                            <input class="form-control" formControlName="userName"
+                                            [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')">
+                                        </div>
+                                        <div class="td">
+                                            <input class="form-control" formControlName="email"
+                                            [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')">
+                                        </div>
+                                        <div class="td">
+                                            <input class="form-control" formControlName="passwordHash"
+                                            [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')">
+                                        </div>
+                                        <div class="td">
+                                            <input class="form-control" formControlName="firstNames"
+                                            [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')">
+                                        </div>
+                                        <div class="td">
+                                            <input class="form-control" formControlName="lastName"
+                                            [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')">
+                                        </div>
+                                        <div class="td">
+                                            <select class="form-control" formControlName="roleId"
+                                            [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')">
+                                                <option value="1">SuperAdmin</option>
+                                                <option value="2">Administrador Sistema</option>
+                                                <option value="3">Administrador Cocina</option>
+                                                <option value="4">Mozo</option>
+                                            </select>   
+                                        </div>
+                                        <div class="td">
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input" type="checkbox" formControlName="active"
+                                                    [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')">
+                                                    <span class="form-check-sign">
+                                                        <span class="check"></span>
+                                                    </span>
+                                                </label>
+                                            </div>
+
+                                            
+                                        </div>
+                                        <div class="td">
+                                            <button type="submit" class="btn btn-sm"
+                                            [disabled]="fg.invalid"
+                                            [ngClass]="(fg.get('id').value > 0 ? 'btn-outline-info':'btn-success')">
+                                                <i class="fa fa-floppy-o"></i>
+                                            </button>&nbsp;
+                                            <button class="btn btn-outline-danger btn-sm" (click)="onDelete(fg.get('id').value,i)"   >
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
