@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Area } from 'app/models/area';
 import { AreaService } from 'app/services/area.service';
@@ -156,6 +156,8 @@ export class MesaComponent implements OnInit {
   
   @HostListener('window:resize', ['$event'])
     onResize(event) {
+      console.log(this.mesitas.nativeElement.offsetWidth);
+      console.log(this.mesitas.nativeElement.offsetHeight);
       let clientWidth = document.getElementById('mesas').clientWidth;
       this.factMesas = clientWidth / this.areaSelectedLength;
       console.log(document.getElementById('mesas'));
@@ -164,8 +166,13 @@ export class MesaComponent implements OnInit {
 
 
   ngAfterViewChecked() {
-    let clientWidth = document.getElementById('mesas').clientWidth;
-    this.factMesas = clientWidth / this.areaSelectedLength;    
+      if (document.getElementById('mesas')) {
+        let clientWidth = document.getElementById('mesas').clientWidth;
+        this.factMesas = clientWidth / this.areaSelectedLength;        
+      }
   }
+
+  @ViewChild('mesitas')
+  mesitas: ElementRef;
 
 }
