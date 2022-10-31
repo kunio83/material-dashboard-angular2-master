@@ -1,0 +1,48 @@
+
+.icgde{
+    font-size: 25px;
+    color: #424242;
+    margin-right: 5px;
+  }
+  
+  .rowdat{
+    border: #c7c5c5 1px solid;
+    background-color: white;
+    margin: 5px;
+    border-radius: 15px 0px 0px 15px;
+  }
+  
+  .coliconm{
+    display: flex;
+    align-items: center;
+    border-right: #c7c5c5 1px solid;
+  }
+
+  .coliconm2{
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+
+  }
+
+  .servact{
+    background-color: #88dc39C8;
+    color: rgb(41, 41, 41)
+  }
+
+  .solmozo{
+    background-color: #d1dc39B4;;
+    color: rgb(41, 41, 41)
+  }
+
+  .solcobro{
+    background-color: #dc7539C8;
+    color: rgb(255, 255, 255)
+  }
+
+
+ 
+  .bordleftround{
+    border-radius: 10px 0 0 10px;
+  }
+  
