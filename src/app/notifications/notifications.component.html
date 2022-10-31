@@ -9,7 +9,7 @@
               <div class="row">
                   <div class="col-md-6">
                       <h4 class="card-title">Notificaciones</h4>
-                      <div class="alert alert-info alert-with-icon" data-notify="container" *ngFor="let notification of notifications" [class.readed]="notification.readed" (click)="setNotificationReaded(notification)">
+                      <div class="alert alert-info alert-with-icon " data-notify="container" *ngFor="let notification of notifications" [class.readed]="notification.readed" [class.unreaded]="!notification.readed" (click)="setNotificationReaded(notification)">
                           <i class="material-icons" data-notify="icon" [hidden]="notification.readed">add_alert</i>
                           <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
                               <i class="material-icons" (click)="deleteNotification(notification)">close</i>

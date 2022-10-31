@@ -1,3 +1,8 @@
 .readed {
-    background-color: #d3ac00;
+    background-color: darkgray;
+}
+
+.unreaded {
+    background-color: #00cae3;
+    cursor: pointer;
 }
