@@ -10,7 +10,6 @@ import { TableService2ItemService } from 'app/services/table-service2-item.servi
 import { UserService } from 'app/services/user.service';
 import { environment } from 'environments/environment';
 
-
 @Component({
   selector: 'servicios',
   templateUrl: './servicios.component.html',
@@ -28,6 +27,7 @@ export class ServiciosComponent implements OnInit {
   selectedService: TableService;
   serviceForms: FormArray = this.fb.array([]);
   notification = null;
+  serviceTotal : number;
 
   constructor(
     private fb: FormBuilder,
@@ -51,11 +51,15 @@ export class ServiciosComponent implements OnInit {
     this.itemStateService.getItemStates().subscribe(
       res => { this.itemStateList = res as []; });
 
+
+      /*
     this.tableServiceService.getTableServices(environment.tenantId).subscribe(
       res => {
         res.sort((a, b) => (a.serviceStateId < b.serviceStateId) ? 1 : ((b.serviceStateId < a.serviceStateId) ? -1 : 0));
         this.tableServiceList = res as [];
-      });
+      });*/
+
+      this.updateList();
 
     this.mesaService.getMesas(environment.tenantId).subscribe(
       res => { this.tablelist = res as []; });
@@ -98,10 +102,12 @@ export class ServiciosComponent implements OnInit {
   detalleServicio(servId: number) {
     this.selectedService = this.tableServiceList.find(x => x.id == servId);
     this.itemForms = this.fb.array([]);
+    this.serviceTotal = 0;
     this.tableService2ItemsService.getTableService2Items(servId).subscribe(
       res => {
         console.log(res);
         (res as []).forEach((serv: any) => {
+          this.serviceTotal+=serv.price * serv.quantity;
           this.itemForms.push(this.fb.group({
             id: [serv.id],
             tableServiceId: [serv.tableServiceId],
@@ -124,6 +130,8 @@ export class ServiciosComponent implements OnInit {
         this.showNotification();
       }
     );
+    this.updateList();
+
   }
 
   showNotification() {
@@ -133,5 +141,12 @@ export class ServiciosComponent implements OnInit {
     }, 3000);
   }
 
+  updateList() {
+    this.tableServiceService.getTableServices(environment.tenantId).subscribe(
+      res => {
+        res.sort((a, b) => (a.serviceStateId < b.serviceStateId) ? 1 : ((b.serviceStateId < a.serviceStateId) ? -1 : 0));
+        this.tableServiceList = res as [];
+      });
+  }
 
 }

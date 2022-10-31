@@ -149,7 +149,7 @@
                                             </div>
                                             <div class="td">
                                                 <select class="form-control" formControlName="itemStateId">
-                                                    <option *ngFor="let state of itemStateList" [value]="itemStateId.id">
+                                                    <option *ngFor="let state of itemStateList" [value]="state.id">
                                                         {{ state.name }}
                                                     </option>
                                                 </select>
