@@ -6,5 +6,8 @@
 export const environment = {
   production: false,
   apiBaseURI: 'https://optirestapi-v1.azurewebsites.net/api/',
+  urlNotificationsHub: 'https://optirestnotifications.azurewebsites.net/',
   tenantId: 2
+  
+  //urlNotificationsHub: 'https://localhost:5001/'
 };
