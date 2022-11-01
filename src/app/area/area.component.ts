@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AreaService } from 'app/services/area.service';
 import { environment } from 'environments/environment';
 
@@ -9,10 +9,10 @@ import { environment } from 'environments/environment';
   styleUrls: ['./area.component.css']
 })
 export class AreaComponent implements OnInit {
-  itemForms : FormArray = this.fb.array([]);
+  itemForms : UntypedFormArray = this.fb.array([]);
   notification = null;
 
-  constructor( private fb : FormBuilder,
+  constructor( private fb : UntypedFormBuilder,
     private areaService : AreaService) { }
 
 
@@ -50,7 +50,7 @@ export class AreaComponent implements OnInit {
     }));
   }
 
-  recordSubmit(fg: FormGroup){
+  recordSubmit(fg: UntypedFormGroup){
     if(fg.value.id == 0)
       this.areaService.postArea(fg.value).subscribe(
         (res: any) => {

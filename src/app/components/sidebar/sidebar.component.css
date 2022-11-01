@@ -1,0 +1,14 @@
+.unreaded{
+    font-weight: bold;
+}
+
+.unreaded-icon{
+    color: blueviolet !important;
+    width: 10px !important;
+    height: 10px !important;
+    font-size: 15px !important;
+    margin-right: -10px !important;
+    position: relative;
+    left: -30px;
+    top: -5px;
+}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ItemCategory } from 'app/models/itemCategory';
 import { CategoriaService } from 'app/services/categoria.service';
 import { CocinaService } from 'app/services/cocina.service';
@@ -12,13 +12,13 @@ import { environment } from 'environments/environment';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-  itemForms : FormArray = this.fb.array([]);
+  itemForms : UntypedFormArray = this.fb.array([]);
   categoryList: [];
   kitchenList: [];
   notification = null;
 
 
-  constructor(private fb : FormBuilder,
+  constructor(private fb : UntypedFormBuilder,
     private menuService : MenuService,
     private categoriaService : CategoriaService,
     private cocinaService : CocinaService
@@ -76,7 +76,7 @@ export class MenuComponent implements OnInit {
     }));
   }
 
-  recordSubmit(fg: FormGroup){
+  recordSubmit(fg: UntypedFormGroup){
     if(fg.value.id == '0')
     {
       this.menuService.postItem(fg.value).subscribe(

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { CategoriaService } from 'app/services/categoria.service';
 import { environment } from 'environments/environment';
 
@@ -10,10 +10,10 @@ import { environment } from 'environments/environment';
 })
 export class CategoriaComponent implements OnInit {
 
-  categoriaForms : FormArray = this.fb.array([]);
+  categoriaForms : UntypedFormArray = this.fb.array([]);
   notification = null;
 
-  constructor(private fb:FormBuilder,
+  constructor(private fb:UntypedFormBuilder,
     private categoriaService: CategoriaService
     ) { }
 
@@ -45,7 +45,7 @@ export class CategoriaComponent implements OnInit {
     }));
   }
 
-  recordSubmit(fg: FormGroup){
+  recordSubmit(fg: UntypedFormGroup){
     if(fg.value.id == '0')
     {
       this.categoriaService.postCategoria(fg.value).subscribe(

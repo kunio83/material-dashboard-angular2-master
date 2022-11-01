@@ -1,13 +1,10 @@
 import { Routes } from '@angular/router';
 
 import { DashboardComponent } from '../../dashboard/dashboard.component';
-import { UserProfileComponent } from '../../user-profile/user-profile.component';
 import { TableListComponent } from '../../table-list/table-list.component';
 import { TypographyComponent } from '../../typography/typography.component';
 import { IconsComponent } from '../../icons/icons.component';
-import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
-import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { HomenComponent } from 'app/homen/homen.component';
 import { CategoriaComponent } from 'app/categoria/categoria.component';
 import { MenuComponent } from 'app/menu/menu.component';
@@ -62,6 +59,8 @@ export const AdminLayoutRoutes: Routes = [
     //         component: UpgradeComponent
     //     }]
     // }
+
+
     { path: 'homen',            component: HomenComponent },
     { path: 'usuario',          component: UsuarioComponent },
     { path: 'categoria',        component: CategoriaComponent },
@@ -72,6 +71,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'cocina',           component: CocinaComponent },
     { path: 'servicios',        component: ServiciosComponent },
     {path: 'pedidos' ,          component: PedidosComponent},
+    { path: 'notifications',  component: NotificationsComponent },
 
     { path: 'dashboard',        component: DashboardComponent },
     { path: 'user-profile',     component: UserProfileComponent },
@@ -81,5 +81,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'maps',             component: MapsComponent },
     { path: 'notifications',    component: NotificationsComponent },
     { path: 'upgrade',          component: UpgradeComponent },
+
     
 ];

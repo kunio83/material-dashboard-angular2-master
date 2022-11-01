@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AreaService } from 'app/services/area.service';
 import { environment } from 'environments/environment';
 import { ItemCategory } from 'app/models/itemCategory';
@@ -14,10 +14,10 @@ import { Kitchen } from 'app/models/kitchen';
   styleUrls: ['./cocina.component.css']
 })
 export class CocinaComponent implements OnInit {
-  itemForms: FormArray = this.fb.array([]);
+  itemForms: UntypedFormArray = this.fb.array([]);
   notification = null;
 
-  constructor(private fb: FormBuilder,
+  constructor(private fb: UntypedFormBuilder,
     private cocinaService: CocinaService) { }
 
   ngOnInit(): void {
@@ -51,7 +51,7 @@ export class CocinaComponent implements OnInit {
   }
 
 
-  recordSubmit(fg: FormGroup) {
+  recordSubmit(fg: UntypedFormGroup) {
     if (fg.value.id == 0)
       this.cocinaService.postCocina(fg.value).subscribe(
         (res: any) => {
