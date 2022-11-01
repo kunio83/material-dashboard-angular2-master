@@ -1,0 +1,112 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="notifdiv">
+            <span *ngIf="notification" class="elementToFadeInAndOut">
+                <i class="fa fa-check-circle {{ notification.class }}"></i>
+                {{ notification.message }}
+            </span>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-tabs card-header-primary">
+                        <h4> Pedidos </h4>
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <span class="nav-tabs-title">Cocina: </span>
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                        <li class="nav-item">
+                                            <a mat-button class="nav-link" href="javascipt:;" data-toggle="tab"
+                                                (click)="selectCocina(0)" active>
+                                                <i class="material-icons">domain</i> Todas
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                    <ng-container *ngFor="let cocina of cocinaList">
+                                        <li class="nav-item">
+                                            <a mat-button class="nav-link" href="javascipt:;" data-toggle="tab"
+                                                (click)="selectCocina(cocina.id)">
+                                                <i class="material-icons">domain</i> {{ cocina.name }}
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                    </ng-container>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <td>Mesa</td>
+                                    <td>Item</td>
+                                    <td>Cantidad</td>
+                                    <td>Ordenado</td>
+                                    <td>Min:Seg</td>
+                                    <td>Estado</td>
+                                    <td style="width: 170px;">Acciones</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ng-container *ngFor="let itemserv of pedidoList">
+                                    <tr>
+                                        <td>
+                                            {{ itemserv.tableService.tableId }}
+                                            <!--{{ getTableName(itemserv.tableService.tableId) }}-->
+                                        </td>
+                                        <td>
+                                            {{ itemserv.item.title }}
+                                        </td>
+                                        <td>
+                                            {{ itemserv.quantity }}
+                                        </td> 
+                                        <td>
+                                            {{ itemserv.orderTime | date: 'dd/MM/yyyy HH:mm' }}
+                                        </td>
+                                        <td>
+                                            <!-- time transurred from orderTime to Now-->
+                                            {{ dateDiff(itemserv.orderTime) }}
+                                        </td>
+                                        <td>
+                                            <span *ngIf="itemserv.itemStateId == 1" style="color: rgb(231, 85, 17)">
+                                                <i class="fa fa-clock-o" ></i>
+                                                Solicitado
+                                            </span>
+                                            <span *ngIf="itemserv.itemStateId == 2" style="color: #00bcd4">
+                                                <i class="fa fa-spinner fa-spin"></i>
+                                                En Progreso
+                                            </span>
+                                            <span *ngIf="itemserv.itemStateId == 3" style="color: rgb(15, 190, 38)">
+                                                <i class="fa fa-check-circle"></i>
+                                                Listo
+                                            </span>
+                                            <span *ngIf="itemserv.itemStateId == 4" style="color: rgb(78, 78, 78)">
+                                                <i class="fa fa-cutlery"></i>
+                                                Entregado
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <button *ngIf="itemserv.itemStateId == 1" class="btn btn-info btn-sm" (click)="updateItemState(itemserv, 2)" style="width: 100%;">
+                                                <i class="fa fa-spinner fa-spin"></i>
+                                                &nbsp;En Progreso
+                                            </button>
+                                            <button *ngIf="itemserv.itemStateId == 2" class="btn btn-success btn-sm" (click)="updateItemState(itemserv, 3)" style="width: 100%;">
+                                                <i class="fa fa-check-circle"></i>
+                                                &nbsp;Listo
+                                            </button>
+                                            <button *ngIf="itemserv.itemStateId == 3" class="btn btn-secondary btn-sm" (click)="updateItemState(itemserv, 4)" style="width: 100%;">
+                                                <i class="fa fa-cutlery"></i>
+                                                &nbsp;Entregado
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

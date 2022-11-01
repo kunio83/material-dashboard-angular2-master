@@ -77,7 +77,7 @@ export class UsuarioComponent implements OnInit {
   onDelete(id: number, i: number) {
     if (id == 0)
       this.userForms.removeAt(i);
-    else if (confirm('Are you sure to delete this record ?'))
+    else if (confirm('¿Seguro que desea eliminarlo definitivamente?'))
       this.userService.deleteUser(id).subscribe(
         res => {
           this.userForms.removeAt(i);
@@ -99,7 +99,7 @@ export class UsuarioComponent implements OnInit {
     }
     setTimeout(() => {
       this.notification = null;
-    },2000);
+    },3000);
   }
 
 }

@@ -117,8 +117,11 @@ export class MesaServComponent implements OnInit {
     this.areaSelectedLength = this.areaList.find(x => x.id == areaId).length;
     this.areaSelectedWidth = this.areaList.find(x => x.id == areaId).width;
     let clientWidth = document.getElementById('mesas').clientWidth;
-    this.factMesas = clientWidth / this.areaSelectedLength;
-    console.log(document.getElementById('mesas').clientWidth);
+    
+    if (document.getElementById('mesas').clientWidth > 0) {
+      this.factMesas = clientWidth / this.areaSelectedLength;
+      console.log(document.getElementById('mesas').clientWidth);
+    }
   }
 
   selectMesa(mesaId) {
@@ -131,15 +134,19 @@ export class MesaServComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    let clientWidth = document.getElementById('mesas').clientWidth;
-    this.factMesas = clientWidth / this.areaSelectedLength;
-    console.log(document.getElementById('mesas'));
-    console.log(document.getElementById('mesas').clientWidth);
+    if (document.getElementById('mesas').clientWidth > 0) {
+      let clientWidth = document.getElementById('mesas').clientWidth;
+      this.factMesas = clientWidth / this.areaSelectedLength;
+      console.log(document.getElementById('mesas'));
+      console.log(document.getElementById('mesas').clientWidth);
+    }
   }
 
-/*
-    ngAfterViewChecked() {
+
+  ngAfterViewChecked() {
+    if (document.getElementById('mesas').clientWidth > 0) {
       let clientWidth = document.getElementById('mesas').clientWidth;
-      this.factMesas = clientWidth / this.areaSelectedLength;    
-    }*/
+      this.factMesas = clientWidth / this.areaSelectedLength;
+    }
+  }
 }

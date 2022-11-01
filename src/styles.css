@@ -1,6 +1,12 @@
 @import "./assets/css/toastr.css";
 
 /* You can add global styles to this file, and also import other style files */
+
+
+body{
+	font-family: Nunito, Courier, monospace;
+}
+
 .grid-table
 {
 	display:table;
@@ -26,7 +32,7 @@
 .td
 {
 	display:table-cell;
-	padding: 10px 1px 1px 5px;
+	padding: 10px 1px 10px 5px;
 }
 .thead div.tr div.td:last-child{
     background-color: #fff;
@@ -45,10 +51,6 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
     animation: fadeinout 2s linear forwards !important;
     opacity: 0;
 }
-
-
-
-
 
 @-webkit-keyframes fadeinout {
   50% { opacity: 1; }
