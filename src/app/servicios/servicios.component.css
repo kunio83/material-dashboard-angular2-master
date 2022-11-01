@@ -45,4 +45,14 @@
   .bordleftround{
     border-radius: 10px 0 0 10px;
   }
+
+  .total{
+    font-size: 1.2rem;
+    color: var(--danger);
+    font-weight: bold;
+    text-align: right;
+    width: 100%;
+    border-top: var(--danger) 2px solid;
+    padding-top: 10px;
+  }
   

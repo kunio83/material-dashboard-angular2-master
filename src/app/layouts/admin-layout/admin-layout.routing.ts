@@ -17,6 +17,7 @@ import { CocinaComponent } from 'app/cocina/cocina.component';
 import { MesaComponent } from 'app/mesa/mesa.component';
 import { MesaServComponent } from 'app/mesa-serv/mesa-serv.component';
 import { ServiciosComponent } from 'app/servicios/servicios.component';
+import { PedidosComponent } from 'app/pedidos/pedidos.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -61,23 +62,24 @@ export const AdminLayoutRoutes: Routes = [
     //         component: UpgradeComponent
     //     }]
     // }
-    { path: 'homen',      component: HomenComponent },
-    { path: 'usuario',      component: UsuarioComponent },
-    { path: 'categoria',          component: CategoriaComponent },
-    { path: 'menu',          component: MenuComponent },
-    { path: 'area',     component: AreaComponent },
-    { path: 'mesa',     component: MesaComponent },
-    { path: 'mesa-servicio',     component: MesaServComponent },
-    { path: 'cocina',     component: CocinaComponent },
+    { path: 'homen',            component: HomenComponent },
+    { path: 'usuario',          component: UsuarioComponent },
+    { path: 'categoria',        component: CategoriaComponent },
+    { path: 'menu',             component: MenuComponent },
+    { path: 'area',             component: AreaComponent },
+    { path: 'mesa',             component: MesaComponent },
+    { path: 'mesa-servicio',    component: MesaServComponent },
+    { path: 'cocina',           component: CocinaComponent },
     { path: 'servicios',        component: ServiciosComponent },
-    
-    { path: 'dashboard',      component: DashboardComponent },
-    { path: 'user-profile',   component: UserProfileComponent },
-    { path: 'table-list',     component: TableListComponent },
-    { path: 'typography',     component: TypographyComponent },
-    { path: 'icons',          component: IconsComponent },
-    { path: 'maps',           component: MapsComponent },
-    { path: 'notifications',  component: NotificationsComponent },
-    { path: 'upgrade',        component: UpgradeComponent },
+    {path: 'pedidos' ,          component: PedidosComponent},
+
+    { path: 'dashboard',        component: DashboardComponent },
+    { path: 'user-profile',     component: UserProfileComponent },
+    { path: 'table-list',       component: TableListComponent },
+    { path: 'typography',       component: TypographyComponent },
+    { path: 'icons',            component: IconsComponent },
+    { path: 'maps',             component: MapsComponent },
+    { path: 'notifications',    component: NotificationsComponent },
+    { path: 'upgrade',          component: UpgradeComponent },
     
 ];

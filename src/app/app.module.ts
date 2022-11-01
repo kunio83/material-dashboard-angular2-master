@@ -10,7 +10,6 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { HomeService } from './services/home.service';
 import { HomeComponent } from './home/home.component';
 
-
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -24,9 +23,7 @@ import { HomeComponent } from './home/home.component';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    HomeComponent,
-    
-
+    HomeComponent
   ],
   providers: [HomeService],
   bootstrap: [AppComponent]

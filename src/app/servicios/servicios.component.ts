@@ -27,7 +27,7 @@ export class ServiciosComponent implements OnInit {
   selectedService: TableService;
   serviceForms: FormArray = this.fb.array([]);
   notification = null;
-  serviceTotal : number;
+  orderTotal: number;
 
   constructor(
     private fb: FormBuilder,
@@ -85,7 +85,18 @@ export class ServiciosComponent implements OnInit {
       });
   }
 
-  addItemForm() { }
+  addItemForm() { 
+    this.itemForms.push(this.fb.group({
+      id: [0],
+      tableServiceId: [this.selectedService.id],
+      itemId: [0],
+      quantity: [1],
+      price: [0],
+      orderTime: [new Date()],
+      deliveryTime: [null],
+      itemStateId: [1]
+    }));
+  }
 
   getTableName(tableId: number) {
     return this.tablelist.find(x => x.id == tableId).name;
@@ -102,12 +113,12 @@ export class ServiciosComponent implements OnInit {
   detalleServicio(servId: number) {
     this.selectedService = this.tableServiceList.find(x => x.id == servId);
     this.itemForms = this.fb.array([]);
-    this.serviceTotal = 0;
+    //this.orderTotal = 0;
     this.tableService2ItemsService.getTableService2Items(servId).subscribe(
       res => {
         console.log(res);
         (res as []).forEach((serv: any) => {
-          this.serviceTotal+=serv.price * serv.quantity;
+          //this.orderTotal+=serv.price * serv.quantity;
           this.itemForms.push(this.fb.group({
             id: [serv.id],
             tableServiceId: [serv.tableServiceId],
@@ -119,26 +130,36 @@ export class ServiciosComponent implements OnInit {
             itemStateId: [serv.itemStateId]
           }));
         });
-      });
-      
+        this.updateTotal();  
+      });   
   }
+
 
   recordSubmit(fg: FormGroup) {
     console.log(this.tableService2ItemsService);
     this.tableServiceService.putTableService(fg.value).subscribe(
       (res: any) => {
-        this.showNotification();
+        this.showNotification('update');
       }
     );
     this.updateList();
-
   }
 
-  showNotification() {
-    this.notification = { class: 'text-primary', message: 'Actualizado Exitosamente' };
+  showNotification(categoria){
+    switch(categoria){
+      case 'insert':
+        this.notification = {class: 'text-success', message: 'Guardado Exitosamente'};
+        break;
+      case 'update':
+        this.notification = {class: 'text-primary', message: 'Actualizado Exitosamente'};
+        break;
+      case 'delete':
+        this.notification = {class: 'text-danger', message: 'Eliminado Exitosamente'};
+        break;
+    }
     setTimeout(() => {
       this.notification = null;
-    }, 3000);
+    },3000);
   }
 
   updateList() {
@@ -148,5 +169,51 @@ export class ServiciosComponent implements OnInit {
         this.tableServiceList = res as [];
       });
   }
+
+  updateTotal(){
+    this.orderTotal = 0;
+    this.itemForms.value.forEach(x => {
+      this.orderTotal += x.price * x.quantity;
+    });
+  }
+
+
+  subRecordSubmit(fg: FormGroup) {
+    if(fg.value.id == 0){
+      this.tableService2ItemsService.addTableService2Item(fg.value).subscribe(
+        (res: any) => {
+          fg.patchValue({id: res.id});
+          this.showNotification('insert');
+        });
+    }else{
+      this.tableService2ItemsService.updateTableService2Item(fg.value).subscribe(
+        (res: any) => {
+          this.showNotification('update');
+        });
+    }
+    this.updateTotal();
+  }
+
+  onDelete(id: number, i: number) {
+    if (id == 0){
+      this.itemForms.removeAt(i);
+      this.updateTotal();
+    }
+    else if (confirm('¿Seguro que desea eliminarlo definitivamente?')){
+      this.tableService2ItemsService.deleteTableService2Item(id).subscribe(
+        res => {
+          this.itemForms.removeAt(i);
+          this.showNotification('delete');
+          this.updateTotal();
+        });
+    }
+    
+  }
+
+  changeItem(id: number, i:number){
+    this.itemForms.controls[i].patchValue({price: this.itemList.find(x => x.id == id).price});
+    this.updateTotal();
+  }
+
 
 }

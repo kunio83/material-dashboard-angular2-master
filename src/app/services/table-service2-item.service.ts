@@ -26,4 +26,12 @@ export class TableService2ItemService {
   deleteTableService2Item(id : number){
     return this.httpClient.delete(environment.apiBaseURI + 'TableService2Item/' + id);
   }
+
+  getInProgressItems(tenantId : number) : Observable<TableService2Item[]>{
+    return this.httpClient.get<TableService2Item[]>(environment.apiBaseURI + 'TableService2Item/inProgressItems?tenantId=' + tenantId);
+  }
+
+  getInProgressbyKitchen(kitchenId : number) : Observable<TableService2Item[]>{
+    return this.httpClient.get<TableService2Item[]>(environment.apiBaseURI + 'TableService2Item/inProgressItemsByKitchen?kitchenId=' + kitchenId);
+  }
 }
