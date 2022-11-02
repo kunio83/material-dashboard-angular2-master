@@ -145,12 +145,15 @@ export class MesaComponent implements OnInit {
   }
 
   selectArea(areaId) {
-      this.areaSelected = areaId;
-      this.areaSelectedLength = this.areaList.find(x => x.id == areaId).length;
-      this.areaSelectedWidth = this.areaList.find(x => x.id == areaId).width;
-      let clientWidth = document.getElementById('mesas').clientWidth;
+    this.areaSelected = areaId;
+    this.areaSelectedLength = this.areaList.find(x => x.id == areaId).length;
+    this.areaSelectedWidth = this.areaList.find(x => x.id == areaId).width;
+    let clientWidth = document.getElementById('mesas').clientWidth;
+    
+    if (document.getElementById('mesas').clientWidth > 0) {
       this.factMesas = clientWidth / this.areaSelectedLength;
       console.log(document.getElementById('mesas').clientWidth);
+    }
   }
 
   

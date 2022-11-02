@@ -34,40 +34,53 @@
                                 <div>
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <ng-container *ngFor="let fg of itemForms.controls; let i = index">
-                                                <form *ngIf="fg.get('id').value == mesaSelected" [formGroup]="fg"
-                                                    (submit)="recordSubmit(fg)">
-                                                    <div class="form-group">
-                                                        <label>Mesa</label>
-                                                        <input class="form-control" formControlName="name">
-                                                    </div>
 
-                                                    <div class="form-group">
-                                                        <label>Estado</label>
-                                                        <select class="form-control" formControlName="stateId">
-                                                            <option *ngFor="let state of stateList" [value]="state.id">
-                                                                {{ state.name }}
-                                                            </option>
-                                                        </select>
-                                                    </div>
+                                            <div class="card">
+                                                <div class="card-header card-header-tabs card-header-primary">
+                                                    <h4 _ngcontent-egp-c78="" class="card-title">Configuración Mesa</h4>
+                                                
+                                                </div>
+                                                <div class="card-body">
+                                                    <ng-container *ngFor="let fg of itemForms.controls; let i = index">
+                                                        <form *ngIf="fg.get('id').value == mesaSelected"
+                                                            [formGroup]="fg" (submit)="recordSubmit(fg)">
+                                                            <div class="form-group">
+                                                                <label>Mesa</label>
+                                                                <input class="form-control" formControlName="name">
+                                                            </div>
 
-                                                    <div class="form-group">
-                                                        <label>Mozo Asignado</label>
-                                                        <select class="form-control" formControlName="userId">
-                                                            <option *ngFor="let user of userList" [value]="user.id">
-                                                                {{ user.username }}
-                                                            </option>
-                                                        </select>
-                                                    </div>
+                                                            <div class="form-group">
+                                                                <label>Estado</label>
+                                                                <select class="form-control" formControlName="stateId">
+                                                                    <option *ngFor="let state of stateList"
+                                                                        [value]="state.id">
+                                                                        {{ state.name }}
+                                                                    </option>
+                                                                </select>
+                                                            </div>
 
-                                                    <div class="form-group">
-                                                        <button type="submit" class="btn btn-sm" [disabled]="fg.invalid"
-                                                            [ngClass]="(fg.get('id').value > 0 ? 'btn-outline-info':'btn-success')">
-                                                            <i class="fa fa-floppy-o"></i>
-                                                        </button>
-                                                    </div>
-                                                </form>
-                                            </ng-container>
+                                                            <div class="form-group">
+                                                                <label>Mozo Asignado</label>
+                                                                <select class="form-control" formControlName="userId">
+                                                                    <option *ngFor="let user of userList"
+                                                                        [value]="user.id">
+                                                                        {{ user.username }}
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <button type="submit" class="btn btn-sm"
+                                                                    [disabled]="fg.invalid"
+                                                                    [ngClass]="(fg.get('id').value > 0 ? 'btn-outline-info':'btn-success')">
+                                                                    <i class="fa fa-floppy-o"></i>
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                    </ng-container>
+
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col" style="padding:0">
                                             <div id="mesas" class="fndmesas" [style.background-size]="factMesas + 'px'"
@@ -94,10 +107,12 @@
                                                                     {{ fg.get('name').value }}
                                                                 </div>
                                                                 <div class="mesa-user">
-                                                                    
-                                                                    <ng-container *ngFor="let user of userList" [value]="user.id">
-                                                                        <div *ngIf = "fg.get('userId').value == user.id">
-                                                                            <i class="fa fa-user" >&nbsp;{{ user.username }}</i>
+
+                                                                    <ng-container *ngFor="let user of userList"
+                                                                        [value]="user.id">
+                                                                        <div *ngIf="fg.get('userId').value == user.id">
+                                                                            <i class="fa fa-user">&nbsp;{{ user.username
+                                                                                }}</i>
                                                                         </div>
                                                                     </ng-container>
                                                                 </div>

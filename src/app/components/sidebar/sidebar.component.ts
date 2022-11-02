@@ -22,10 +22,11 @@ export const ROUTES: RouteInfo[] = [
     { path: '/pedidos', title: 'Pedidos',  icon:'waving_hand', class: '' },
     { path: '/businessConfig', title: 'Configuración',  icon:'settings', class: '' },
 
+    /*
     { path: '/user-profile', title: 'User Profile',  icon:'person', class: '' },
     { path: '/table-list', title: 'Table List',  icon:'content_paste', class: '' },
     { path: '/icons', title: 'Icons',  icon:'bubble_chart', class: '' },
-    { path: '/notifications', title: 'Notifications',  icon:'notifications', class: ''},
+    { path: '/notifications', title: 'Notifications',  icon:'notifications', class: ''},*/
 ];
 
 @Component({

@@ -51,7 +51,7 @@ export class PedidosComponent implements OnInit {
 
   dateDiff(init) {
     var dateOrder = new Date(init);
-    var diff = (new Date().getTime() - dateOrder.getTime()) / (60 * 1000);
+    var diff = (new Date().getTime() - dateOrder.getTime()) / (60 * 1000) + 180;
     return Math.trunc(diff) + ':' +  ("0" + Math.trunc((diff - Math.trunc(diff)) * 60)).slice(-2);
   }
 
