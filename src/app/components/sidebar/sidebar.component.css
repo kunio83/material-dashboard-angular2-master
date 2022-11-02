@@ -12,3 +12,22 @@
     left: -30px;
     top: -5px;
 }
+
+.logo_enc {
+    height: 70px;
+    padding: 15px 0px;
+    margin: 0;
+    display: block;
+    z-index: 4;
+}
+
+.logo_img {
+    position:absolute;
+    background-color: white;
+    width: 260px;
+    top: 0;
+    left: 0;
+
+    z-index: 5;
+
+}
