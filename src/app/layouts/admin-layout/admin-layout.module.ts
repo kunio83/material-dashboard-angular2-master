@@ -24,6 +24,7 @@ import { MesaComponent } from 'app/mesa/mesa.component';
 import { MesaServComponent } from 'app/mesa-serv/mesa-serv.component';
 import { ServiciosComponent } from 'app/servicios/servicios.component';
 import { PedidosComponent } from 'app/pedidos/pedidos.component';
+import { BusinessConfigComponent } from 'app/businessConfig/businessConfig.component';
 
 @NgModule({
   imports: [
@@ -53,7 +54,8 @@ import { PedidosComponent } from 'app/pedidos/pedidos.component';
     MesaComponent,
     MesaServComponent,
     ServiciosComponent,
-    PedidosComponent
+    PedidosComponent,
+    BusinessConfigComponent,
   ]
 })
 

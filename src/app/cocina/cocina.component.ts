@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { AreaService } from 'app/services/area.service';
 import { environment } from 'environments/environment';
-import { ItemCategory } from 'app/models/itemCategory';
-import { CategoriaService } from 'app/services/categoria.service';
 import { CocinaService } from 'app/services/cocina.service';
-import { MenuService } from 'app/services/menu.service';
-import { Kitchen } from 'app/models/kitchen';
 
 @Component({
   selector: 'cocina',

@@ -1,0 +1,50 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="notifdiv">
+            <span *ngIf="notification" class="elementToFadeInAndOut">
+                <i class="fa fa-check-circle {{ notification.class }}"></i>
+                {{ notification.message }}
+            </span>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-tabs card-header-primary">
+                        <h4 class="card-title">Configuración General</h4>
+                    </div>  
+                    <div class="card-body table-responsive">
+                        <div class="grid-table">
+                            <div class="thead">
+                                <div class="tr">
+                                    <div class="td">Nombre Fantasía</div>
+                                    <div class="td">Eslogan</div>
+                                    <div class="td">Logo</div>
+                                    <div class="td">Descripción del comercio</div>
+                                </div>
+                            </div>
+                            <div class="tbody">
+                                <ng-container *ngFor="let fg of itemForms.controls; let i = index">
+                                    <form class="tr" [formGroup]="fg" (submit)="recordSubmit(fg)">
+                                        <div class="td">
+                                            <input class="form-control" formControlName="name">
+                                        </div>
+                                        <div class="td">
+                                            <input class="form-control" formControlName="summary">
+                                        </div>
+                                        <div class="td">
+                                            <button type="submit" class="btn btn-sm"
+                                            [disabled]="fg.invalid"
+                                            [ngClass]="(fg.get('id').value > 0 ? 'btn-outline-info':'btn-success')">
+                                                <i class="fa fa-floppy-o"></i>
+                                            </button>&nbsp;
+                                        </div>
+                                    </form>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>                        
+</div>
