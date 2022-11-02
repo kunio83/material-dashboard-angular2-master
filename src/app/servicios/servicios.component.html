@@ -1,0 +1,174 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="notifdiv">
+            <span *ngIf="notification" class="elementToFadeInAndOut">
+                <i class="fa fa-check-circle {{ notification.class }}"></i>
+                {{ notification.message }}
+            </span>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title>">Servicios activos</h4>
+                    </div>
+                    <div class="card-body">
+                        <a href="javascript:;" *ngFor="let serv of tableServiceList" (click)="detalleServicio(serv.id)">
+                            <div class="row  align-items-center rowdat my-1" [ngClass]="(serv.serviceStateId == 1 ? 'servact':
+                            (serv.serviceStateId == 2 ? 'solmozo': 'solcobro'))">
+                                <div class="col-2 coliconm bordleftround">
+                                    <span class="material-symbols-outlined icgde py-2">
+                                        table_bar
+                                    </span>
+                                    {{ getTableName(serv.tableId) }}
+                                </div>
+                                <div class="col-4 coliconm">
+                                    <span class="material-symbols-outlined icgde py-2">
+                                        face
+                                    </span>
+                                    {{ getUserName(serv.userId) }}
+                                </div>
+                                <div class="col-2 coliconm">
+                                    <span class="material-symbols-outlined icgde py-2">
+                                        group_add
+                                    </span>
+                                    {{ serv.diners }}
+                                </div>
+
+                                <div class="col-2 coliconm2">
+                                    <span class="material-symbols-outlined icgde py-2">
+                                        receipt_long
+                                    </span>
+                                    <span>{{ getStateName(serv.serviceStateId) }}</span>
+                                </div>
+                            </div>
+
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title>">Detalle de Servicio</h4>
+                    </div>
+                    <div class="card-body">
+                        <div *ngIf="!selectedService">
+                            <h3 class="text-center">Seleccione un servicio</h3>
+                        </div>
+                        <div *ngIf="selectedService">
+                            <div class="grid-table">
+                                <div class="thead">
+                                    <div class="tr">
+                                        <div class="td">Mesa</div>
+                                        <div class="td">Mozo</div>
+                                        <div class="td" style="width: 40px;">Comensales</div>
+                                        <div class="td">Estado</div>
+                                        <div class="td" style="width: 40px;"></div>
+                                    </div>
+                                </div>
+                                <div class="tbody">
+                                    <ng-container *ngFor="let fg of serviceForms.controls">
+                                        <form class="tr" *ngIf="fg.get('id').value == selectedService.id"
+                                            [formGroup]="fg" (submit)="recordSubmit(fg)">
+                                            <div class="td py-0">
+                                                {{ getTableName(fg.get('tableId').value) }}
+                                            </div>
+                                            <div class="td py-0">
+                                                <select class="form-control" formControlName="userId">
+                                                    <option *ngFor="let user of userList" [value]="user.id">
+                                                        {{ user.username }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="td py-0">
+                                                <input type="number"  class="form-control" formControlName="diners">
+                                            </div>
+
+                                            <div class="td py-0">
+                                                <select class="form-control" formControlName="serviceStateId">
+                                                    <option *ngFor="let state of serviceStateList" [value]="state.id">
+                                                        {{ state.name }}
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <div class="td py-0">
+                                                <button type="submit" class="btn btn-sm btn-outline-info">
+                                                    <i class="fa fa-floppy-o"></i>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="selectedService">
+                    <div class="card">
+                        <div class="card-header card-header-warning">
+                            <h4 class="card-title>">Pedido</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="grid-table">
+                                <div class="thead">
+                                    <div class="tr">
+                                        <div class="td">Producto</div>
+                                        <div class="td" style="width: 40px;">Cantidad</div>
+                                        <div class="td">Precio</div>
+                                        <div class="td">Estado</div>
+                                        <div class="td">
+                                            <button class="btn btn-outline-success btn-sm" (click)="addItemForm()">
+                                                <i class="fa fa-plus"></i> Agregar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tbody">
+                                    <ng-container *ngFor="let fg of itemForms.controls, let i = index">
+                                        <form class="tr" [formGroup]="fg" (submit)="subRecordSubmit(fg)">
+                                            <div class="td py-0">
+                                                <select class="form-control" formControlName="itemId" (change)="changeItem(fg.get('itemId').value,i)">
+                                                    <option *ngFor="let item of itemList" [value]="item.id">
+                                                        {{ item.title }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="td py-0">
+                                                <input type="number" class="form-control" formControlName="quantity" (change)="changeItem(fg.get('itemId').value,i)">
+                                            </div>
+                                            <div class="td py-0" style="width: 150px;" >
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text">$</span>
+                                                    <input class="form-control" formControlName="price" style="text-align:right;">
+                                                </div>
+                                            </div>
+                                            <div class="td py-0">
+                                                <select class="form-control" formControlName="itemStateId">
+                                                    <option *ngFor="let state of itemStateList" [value]="state.id">
+                                                        {{ state.name }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="td py-0" style="white-space: nowrap; width:10px">
+                                                <button type="submit" class="btn btn-sm"
+                                                [disabled]="fg.invalid"
+                                                [ngClass]="(fg.get('id').value > 0 ? 'btn-outline-info':'btn-success')">
+                                                    <i class="fa fa-floppy-o"></i>
+                                                </button>&nbsp;
+                                                <button class="btn btn-outline-danger btn-sm" (click)="onDelete(fg.get('id').value,i)"   >
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </div>
+
+                                        </form>
+                                    </ng-container>
+                                    
+                                </div>
+                            </div>
+                            <div class="total">{{ orderTotal | currency }} </div>
+                        </div>
+
+                    </div>

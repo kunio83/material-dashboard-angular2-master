@@ -78,7 +78,7 @@
                                                     [style.height]="areaSelectedWidth * factMesas + 'px'">
                                                     <ng-container *ngFor="let fg of itemForms.controls; let i = index">
 
-                                                        <a href="#/mesa-servicio" class="link">
+                                                        <a href="javascript:;" class="link">
                                                             <div class="mesa"
                                                                 *ngIf="fg.get('areaId').value == areaSelected"
                                                                 [style.left]="fg.get('posX').value * factMesas + 'px'"

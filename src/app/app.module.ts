@@ -25,8 +25,7 @@ import { ToastrModule } from 'ngx-toastr';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    HomeComponent,
-
+    HomeComponent
   ],
   providers: [HomeService],
   bootstrap: [AppComponent]

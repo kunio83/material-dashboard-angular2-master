@@ -164,15 +164,18 @@ export class MesaComponent implements OnInit {
       console.log(document.getElementById('mesas').clientWidth);
     }
 
-
-  ngAfterViewChecked() {
+//Master_rama
+  @ViewChild('mesitas')
+  mesitas: ElementRef;
+  
+  
+  //Facundo_rama
+    ngAfterViewChecked() {
       if (document.getElementById('mesas')) {
         let clientWidth = document.getElementById('mesas').clientWidth;
         this.factMesas = clientWidth / this.areaSelectedLength;        
       }
   }
-
-  @ViewChild('mesitas')
-  mesitas: ElementRef;
+  
 
 }
