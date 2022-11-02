@@ -45,7 +45,8 @@ export class PedidosComponent implements OnInit {
   }
 
   getTableName(tableId: number) {
-    return this.tableList.find(x => x.id == tableId).name;
+    var table = this.tableList.find(x => x.id == tableId);
+    return table ? table.name : '';
   }
 
   dateDiff(init) {

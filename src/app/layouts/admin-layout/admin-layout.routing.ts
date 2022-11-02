@@ -70,17 +70,14 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'mesa-servicio',    component: MesaServComponent },
     { path: 'cocina',           component: CocinaComponent },
     { path: 'servicios',        component: ServiciosComponent },
-    {path: 'pedidos' ,          component: PedidosComponent},
-    { path: 'notifications',  component: NotificationsComponent },
+    {path:  'pedidos' ,         component: PedidosComponent},
+    { path: 'notifications',    component: NotificationsComponent },
 
     { path: 'dashboard',        component: DashboardComponent },
-    { path: 'user-profile',     component: UserProfileComponent },
     { path: 'table-list',       component: TableListComponent },
     { path: 'typography',       component: TypographyComponent },
     { path: 'icons',            component: IconsComponent },
-    { path: 'maps',             component: MapsComponent },
-    { path: 'notifications',    component: NotificationsComponent },
-    { path: 'upgrade',          component: UpgradeComponent },
+    { path: 'notifications',    component: NotificationsComponent }
 
     
 ];

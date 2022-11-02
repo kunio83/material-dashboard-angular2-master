@@ -99,15 +99,28 @@ export class ServiciosComponent implements OnInit {
   }
 
   getTableName(tableId: number) {
-    return this.tablelist.find(x => x.id == tableId).name;
+    var tableName = this.tablelist.find(x => x.id == tableId)
+    if (tableName != undefined) {
+      return tableName.name;
+    }
+
+    return "";
   }
 
   getUserName(userId: number) {
-    return this.userList.find(x => x.id == userId).firstNames;
+    var userName = this.userList.find(x => x.id == userId)
+    if (userName != undefined) {
+      return userName.firstNames;
+    }
+    return "";
   }
 
   getStateName(stateId: number) {
-    return this.serviceStateList.find(x => x.id == stateId).name;
+    var stateName = this.serviceStateList.find(x => x.id == stateId)
+    if (stateName != undefined) {
+      return stateName.name;
+    }
+    return "";
   }
 
   detalleServicio(servId: number) {
