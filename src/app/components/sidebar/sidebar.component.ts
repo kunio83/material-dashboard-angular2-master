@@ -19,7 +19,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/cocina', title: 'Cocinas',  icon:'food_bank', class: '' },
     { path: '/servicios', title: 'Mesas activas',  icon:'dinner_dining', class: '' },
     { path: '/pedidos', title: 'Pedidos',  icon:'waving_hand', class: '' },
-    { path: '/business-config', title: 'Configuración',  icon:'settings', class: '' },
+    { path: '/businessConfig', title: 'Configuración',  icon:'settings', class: '' },
 
     { path: '/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '' },
     { path: '/user-profile', title: 'User Profile',  icon:'person', class: '' },
