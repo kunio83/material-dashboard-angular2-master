@@ -1,0 +1,108 @@
+<div _ngcontent-pco-c6="" class="main-content">
+    <p>
+        
+    </p>
+    <div _ngcontent-pco-c6="" class="container-fluid">
+        <div _ngcontent-pco-c6="" class="row">
+            <div _ngcontent-pco-c6="" class="col-md-8">
+                <div _ngcontent-pco-c6="" class="card">
+                    <div _ngcontent-pco-c6="" class="card-header card-header-danger">
+                        <h4 _ngcontent-pco-c6="" class="card-title">Configuracion del Negocio</h4>
+                    </div>
+                    <div _ngcontent-pco-c6="" class="card-body">
+                        <form>
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Nombre para Mostrar</label>
+                              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="Churro Man">
+                              <small id="emailHelp" class="form-text text-muted"></small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Slogan</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="El super churro">
+                                <small id="emailHelp" class="form-text text-muted"></small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Descripción del comercio</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" >Ubicado en el centro de Flores, desde 1955 Churro Man
+                                    ofrece a los vecinos la mejor comida casera. Atendido por sus propios dueños</textarea>
+                            </div>
+                            <div style="text-align:right;">
+                                <button type="submit" class="btn btn-danger">Guardar</button>
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div _ngcontent-pco-c6="" class="col-md-4">
+                <div _ngcontent-pco-c6="" class="card card-profile">
+                    <div _ngcontent-pco-c6="" class="card-avatar"><a _ngcontent-pco-c6="" href="javascript:void(0)"><img
+                                _ngcontent-pco-c6="" class="img" src="./assets/img/faces/marc.jpg"></a></div>
+                    <div _ngcontent-pco-c6="" class="card-body">
+                        <h2 _ngcontent-pco-c6="" class="card-title"><strong> Churro Man </strong></h2>
+                        <h4 _ngcontent-pco-c6="" class="card-category text-gray">El super churro</h4>
+                        <p></p>
+                        
+                        <p _ngcontent-pco-c6="" class="card-description"> Ubicado en el centro de Flores, desde 1955 Churro Man ofrece a los vecinos la mejor comida casera. Atendido por sus propios dueños </p><a _ngcontent-pco-c6=""
+                            class="btn btn-danger btn-round" href="javascript:void(0)">Cambiar Logo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="notifdiv">
+            <span *ngIf="notification" class="elementToFadeInAndOut">
+                <i class="fa fa-check-circle {{ notification.class }}"></i>
+                {{ notification.message }}
+            </span>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-tabs card-header-primary">
+                        <h4 class="card-title">Configuración General</h4>
+                    </div>  
+                    <div class="card-body table-responsive">
+                        <div class="grid-table">
+                            <div class="thead">
+                                <div class="tr">
+                                    <div class="td">Nombre Fantasía</div>
+                                    <div class="td">Eslogan</div>
+                                    <div class="td">Logo</div>
+                                    <div class="td">Descripción del comercio</div>
+                                </div>
+                            </div>
+                            <div class="tbody">
+                                <ng-container *ngFor="let fg of itemForms.controls; let i = index">
+                                    <form class="tr" [formGroup]="fg" (submit)="recordSubmit(fg)">
+                                        <div class="td">
+                                            <input class="form-control" formControlName="name">
+                                        </div>
+                                        <div class="td">
+                                            <input class="form-control" formControlName="summary">
+                                        </div>
+                                        <div class="td">
+                                            <button type="submit" class="btn btn-sm"
+                                            [disabled]="fg.invalid"
+                                            [ngClass]="(fg.get('id').value > 0 ? 'btn-outline-info':'btn-success')">
+                                                <i class="fa fa-floppy-o"></i>
+                                            </button>&nbsp;
+                                        </div>
+                                    </form>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>                        
+</div>
+
+-->
