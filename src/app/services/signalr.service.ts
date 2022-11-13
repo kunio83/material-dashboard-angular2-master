@@ -5,11 +5,14 @@ import { BehaviorSubject } from 'rxjs';
 import { NotificationService } from './notification.service';
 import { Notification } from '../models/notification';
 import { v4 as uuidv4 } from 'uuid';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SignalrService {
+  appName: string = 'optirest-admin';
+  appGuid: string;
   hubConnection: signalR.HubConnection;
   private appsConnectedBehaviorSubject: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
@@ -21,15 +24,23 @@ export class SignalrService {
 
   startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
-                            .withUrl('https://localhost:5001/mainHub',{
-                              skipNegotiation: true,
-                              transport: signalR.HttpTransportType.WebSockets
-                            })
-                            .build();
+      .withUrl(environment.urlNotificationsHub + 'mainHub', {
+        skipNegotiation: true,
+        transport: signalR.HttpTransportType.WebSockets
+      })
+      .build();
 
     this.hubConnection
       .start()
       .then(() => {
+        if (localStorage.getItem('appGuid') != null) {
+          this.appGuid = localStorage.getItem('appGuid') ?? '';
+        }
+        else {
+          this.appGuid = uuidv4();
+          localStorage.setItem('appGuid', this.appGuid);
+        }
+
         this.updateAppsConnected();
       })
       .catch(err => console.log('Error while starting connection: ' + err));
@@ -40,8 +51,8 @@ askServer = () => {
     .catch(err => console.error(err));
   }
 
-  askServerListener = () => {
-    this.hubConnection.on('askServerResponse', (message) => {
+  startReceiveMessage = () => {
+    this.hubConnection.on('receiveMessage', (message) => {
       this.toastr.success(message);
 
       let notification = new Notification(uuidv4(), 'Some title', message, new Date(), 'Some type', false);
@@ -51,13 +62,30 @@ askServer = () => {
   }
 
   updateAppsConnected = () => {
-    this.hubConnection.invoke('GetConnectionId').then((connectionId) => {
-      this.hubConnection.invoke('SetConnectionId', 'optirest-admin;'+connectionId).then(() => {
+      this.hubConnection.invoke('SetConnectionId', this.appGuid, this.appName, '0').then(() => {
         this.hubConnection.invoke('GetAppIds').then((appIds) => {
-          console.log('appIds', appIds);
+          console.log('appIds:-->', appIds);
           this.appsConnectedBehaviorSubject.next(appIds);
         })
       });
-    })
-  };
+  }
+
+  // sendNotificationByAppName = (message: string, appName: string) => {
+  //   let connectionIds: string[] = this.appsConnectedBehaviorSubject.getValue().map(a => a.notificationAppData).filter(a => a.appName == appName).map(e => e.connectionId);
+
+  //   this.hubConnection.invoke('sendMessage', message, connectionIds)
+  //     .catch(err => console.error(err));
+  // }
+
+  sendNotificationByAppName = (message: string, appName: string) => {
+    this.hubConnection.invoke('sendMessageByAppName', message, 'optirest-comensal')
+      .catch(err => console.error(err));
+  }
+
+  sendNotificationByAppGuid = (message: string, appGuid: string) => {
+    let connectionId: string = this.appsConnectedBehaviorSubject.getValue().find(q => q.appGuid == appGuid)?.notificationAppData.connectionId ?? '';
+
+    this.hubConnection.invoke('sendMessage', message, [connectionId])
+      .catch(err => console.error(err));
+  }
 }

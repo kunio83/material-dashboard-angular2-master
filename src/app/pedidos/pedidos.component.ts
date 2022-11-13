@@ -4,6 +4,7 @@ import { TableService2Item } from 'app/models/tablesService2Item';
 import { CocinaService } from 'app/services/cocina.service';
 import { ItemStateService } from 'app/services/item-state.service';
 import { MesaService } from 'app/services/mesa.service';
+import { SignalrService } from 'app/services/signalr.service';
 import { TableService2ItemService } from 'app/services/table-service2-item.service';
 import { environment } from 'environments/environment';
 
@@ -26,7 +27,8 @@ export class PedidosComponent implements OnInit {
     private tableService2ItemService: TableService2ItemService,
     private itemStateService: ItemStateService,
     private kitchenService: CocinaService,
-    private tableService: MesaService
+    private tableService: MesaService,
+    private signalRService: SignalrService
   ) { }
 
 
@@ -59,6 +61,9 @@ export class PedidosComponent implements OnInit {
     pedido.itemStateId = itemStateId;
     this.tableService2ItemService.updateTableService2Item(pedido).subscribe(
       res => {
+        
+        this.signalRService.sendNotificationByAppName('refreshorder', 'optirest-comensal');
+
         this.notification = { class: 'text-success', message: 'Pedido actualizado' };
         setTimeout(() => this.notification = null, 4000);
       }
