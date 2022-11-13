@@ -1,15 +1,15 @@
-<div _ngcontent-pco-c6="" class="main-content">
+<div class="main-content">
     <p>
         
     </p>
-    <div _ngcontent-pco-c6="" class="container-fluid">
-        <div _ngcontent-pco-c6="" class="row">
-            <div _ngcontent-pco-c6="" class="col-md-8">
-                <div _ngcontent-pco-c6="" class="card">
-                    <div _ngcontent-pco-c6="" class="card-header card-header-danger">
-                        <h4 _ngcontent-pco-c6="" class="card-title">Configuracion del Negocio</h4>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Configuracion del Negocio</h4>
                     </div>
-                    <div _ngcontent-pco-c6="" class="card-body">
+                    <div class="card-body">
                         <form>
                             <div class="form-group">
                               <label for="exampleInputEmail1">Nombre para Mostrar</label>
@@ -35,21 +35,49 @@
                     </div>
                 </div>
             </div>
-            <div _ngcontent-pco-c6="" class="col-md-4">
-                <div _ngcontent-pco-c6="" class="card card-profile">
-                    <div _ngcontent-pco-c6="" class="card-avatar"><a _ngcontent-pco-c6="" href="javascript:void(0)"><img
-                                _ngcontent-pco-c6="" class="img" src="./assets/img/faces/marc.jpg"></a></div>
-                    <div _ngcontent-pco-c6="" class="card-body">
-                        <h2 _ngcontent-pco-c6="" class="card-title"><strong> Churro Man </strong></h2>
-                        <h4 _ngcontent-pco-c6="" class="card-category text-gray">El super churro</h4>
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <div class="card-avatar"><a href="javascript:void(0)"><img
+                                class="img" src="./assets/img/faces/marc.jpg"></a></div>
+                    <div class="card-body">
+                        <h2 class="card-title"><strong> Churro Man </strong></h2>
+                        <h4 class="card-category text-gray">El super churro</h4>
                         <p></p>
                         
-                        <p _ngcontent-pco-c6="" class="card-description"> Ubicado en el centro de Flores, desde 1955 Churro Man ofrece a los vecinos la mejor comida casera. Atendido por sus propios dueños </p><a _ngcontent-pco-c6=""
+                        <p class="card-description"> Ubicado en el centro de Flores, desde 1955 Churro Man ofrece a los vecinos la mejor comida casera. Atendido por sus propios dueños </p><a _ngcontent-pco-c6=""
                             class="btn btn-danger btn-round" href="javascript:void(0)">Cambiar Logo</a>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div style="width: 300px;">
+            <form>
+                <div class="form-group">
+                    <fieldset class="form-group">
+                        {{imageError}}
+                        <div class="custom-file fileInputProfileWrap">
+                            <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile">
+                            <div class="img-space">
+        
+                                <ng-container *ngIf="isImageSaved; else elseTemplate">
+                                    <img [src]="cardImageBase64" />
+                                </ng-container>
+                                <ng-template #elseTemplate>
+                                    <img src="./assets/img/placeholder.png" class="img-responsive">
+                                </ng-template>
+        
+                            </div>
+        
+                        </div>
+                    </fieldset>
+                </div>
+                <!--
+                <a class="btn btn-danger" (click)="removeImage()" *ngIf="isImageSaved">Remove</a>-->
+            </form>
+
+        </div>
+
     </div>
 </div>
 <!--
