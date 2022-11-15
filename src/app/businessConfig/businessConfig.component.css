@@ -1,5 +1,4 @@
 .form-control {
-
     font-size: 18px;
 }
 
@@ -12,12 +11,10 @@
 }
 
 .img-space {
-    border: dashed 1px #d3d3d3;
-    border-radius: 8px;
     background-color: #f2f2f2;
     height: auto;
-    width: 200px;
-    height: 200px;
+    width: 130px;
+    height: 130px;
     overflow: hidden;
 }
 

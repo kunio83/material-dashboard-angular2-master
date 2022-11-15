@@ -34,51 +34,138 @@
                                 <div>
                                     <div class="row">
                                         <div class="col-md-3">
+                                            <div class="row">
+                                                <div class="card">
+                                                    <div class="card-header card-header-tabs card-header-primary">
+                                                        <h4 _ngcontent-egp-c78="" class="card-title">Configuración Mesa
+                                                        </h4>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <ng-container
+                                                            *ngFor="let fg of itemForms.controls; let i = index">
+                                                            <form *ngIf="fg.get('id').value == mesaSelected"
+                                                                [formGroup]="fg" (submit)="recordSubmit(fg)">
+                                                                <div class="form-group">
+                                                                    <label>Mesa</label>
+                                                                    <input class="form-control" formControlName="name">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Estado</label>
+                                                                    <select class="form-control"
+                                                                        formControlName="stateId">
+                                                                        <ng-container
+                                                                            *ngIf="fg.get('stateId').value == 1">
+                                                                            <option value="1">Disponible</option>
+                                                                            <option value="3">Cerrada</option>
+                                                                            <option value="4">Reservada</option>
+                                                                        </ng-container>
+                                                                        <ng-container
+                                                                            *ngIf="fg.get('stateId').value == 2">
+                                                                            <option value="2">Ocupada</option>
+                                                                        </ng-container>
+                                                                        <ng-container
+                                                                            *ngIf="fg.get('stateId').value == 3">
+                                                                            <option value="1">Disponible</option>
+                                                                            <option value="3" selected>Cerrada</option>
+                                                                            <option value="4">Reservada</option>
+                                                                        </ng-container>
+                                                                        <ng-container
+                                                                            *ngIf="fg.get('stateId').value == 4">
+                                                                            <option value="1">Disponible</option>
+                                                                            <option value="3">Cerrada</option>
+                                                                            <option value="4" selected>Reservada
+                                                                            </option>
+                                                                        </ng-container>
+                                                                        <ng-container
+                                                                            *ngIf="fg.get('stateId').value == 5">
+                                                                            <option value="1">Disponible</option>
+                                                                            <option value="3">Cerrada</option>
+                                                                            <option value="4">Reservada</option>
+                                                                            <option value="5" selected>Limpiar</option>
+                                                                        </ng-container>
+                                                                        <!--
+                                                                            <option *ngFor="let state of stateList"
+                                                                                [value]="state.id">
+                                                                                {{ state.name }}
+                                                                            </option>
+                                                                            -->
+                                                                    </select>
+                                                                </div>
 
-                                            <div class="card">
-                                                <div class="card-header card-header-tabs card-header-primary">
-                                                    <h4 _ngcontent-egp-c78="" class="card-title">Configuración Mesa</h4>
-                                                
+                                                                <div class="form-group">
+                                                                    <label>Mozo Asignado</label>
+                                                                    <select class="form-control"
+                                                                        formControlName="userId">
+                                                                        <option *ngFor="let user of userList"
+                                                                            [value]="user.id">
+                                                                            {{ user.username }}
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <button type="submit" class="btn btn-sm"
+                                                                        [disabled]="fg.invalid"
+                                                                        [ngClass]="(fg.get('id').value > 0 ? 'btn-outline-info':'btn-success')">
+                                                                        <i class="fa fa-floppy-o"></i>
+                                                                    </button>
+                                                                </div>
+
+
+                                                                <ng-container
+                                                                    *ngIf="fg.get('stateId').value == 1 || fg.get('stateId').value == 3 || fg.get('stateId').value == 4">
+                                                                    <form (submit)="abrirMesa()">
+                                                                        <div class="row"
+                                                                            style="border: 1px solid #35d374; border-radius: 5px;">
+                                                                            <div class="col">
+                                                                                <div class="form-group row"
+                                                                                    style="align-items:baseline;">
+                                                                                    <label>Comensales</label>
+                                                                                    <div class="col-sm-6">
+                                                                                        <input type="number" min="1"
+                                                                                            value="2"
+                                                                                            class="form-control" id="comensales" name="comensales">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <button type="submit"
+                                                                                    class="btn btn-success btn-sm"
+                                                                                    style="margin-top: 14px;">
+                                                                                    Abrir Mesa
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </ng-container>
+
+                                                            </form>
+
+
+
+                                                        </ng-container>
+
+                                                    </div>
                                                 </div>
-                                                <div class="card-body">
-                                                    <ng-container *ngFor="let fg of itemForms.controls; let i = index">
-                                                        <form *ngIf="fg.get('id').value == mesaSelected"
-                                                            [formGroup]="fg" (submit)="recordSubmit(fg)">
-                                                            <div class="form-group">
-                                                                <label>Mesa</label>
-                                                                <input class="form-control" formControlName="name">
-                                                            </div>
+                                            </div>
 
-                                                            <div class="form-group">
-                                                                <label>Estado</label>
-                                                                <select class="form-control" formControlName="stateId">
-                                                                    <option *ngFor="let state of stateList"
-                                                                        [value]="state.id">
-                                                                        {{ state.name }}
-                                                                    </option>
-                                                                </select>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label>Mozo Asignado</label>
-                                                                <select class="form-control" formControlName="userId">
-                                                                    <option *ngFor="let user of userList"
-                                                                        [value]="user.id">
-                                                                        {{ user.username }}
-                                                                    </option>
-                                                                </select>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <button type="submit" class="btn btn-sm"
-                                                                    [disabled]="fg.invalid"
-                                                                    [ngClass]="(fg.get('id').value > 0 ? 'btn-outline-info':'btn-success')">
-                                                                    <i class="fa fa-floppy-o"></i>
-                                                                </button>
-                                                            </div>
-                                                        </form>
-                                                    </ng-container>
-
+                                            <div class="row">
+                                                <div class="leyenda">
+                                                    <div class="mesa-disponible ref">
+                                                        LIBRE
+                                                    </div>
+                                                    <div class="mesa-ocupada ref">
+                                                        OCUPADA
+                                                    </div>
+                                                    <div class="mesa-limpiar ref">
+                                                        LIMPIAR
+                                                    </div>
+                                                    <div class="mesa-cerrada ref">
+                                                        CERRADA
+                                                    </div>
+                                                    <div class="mesa-reservada ref">
+                                                        RESERVADA
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -99,20 +186,25 @@
                                                                 [style.width]="fg.get('length').value * factMesas + 'px'"
                                                                 [style.height]="fg.get('width').value * factMesas + 'px'"
                                                                 [ngClass]="(fg.get('shapeId').value != 2 ? 'mesa-cuadrada' : 'mesa-redonda')"
-                                                                [ngClass]="(fg.get('stateId').value == 1 ? 'mesa-disponible' : (fg.get('stateId').value == 2 ? 'mesa-ocupada' : 'mesa-cerrada'))"
+                                                                [ngClass]="(fg.get('stateId').value == 1 ? 'mesa-disponible' : 
+                                                                            (fg.get('stateId').value == 2 ? 'mesa-ocupada' :
+                                                                            (fg.get('stateId').value == 3 ? 'mesa-cerrada' : 
+                                                                            (fg.get('stateId').value == 4 ? 'mesa-reservada' :
+                                                                            'mesa-limpiar'))))"
                                                                 (click)="selectMesa(fg.get('id').value)">
 
 
                                                                 <div class="mesa-title">
                                                                     {{ fg.get('name').value }}
                                                                 </div>
-                                                                <div class="mesa-user">
-
+                                                                <div class="mesa-user"
+                                                                    [style.top]="fg.get('width').value * factMesas + 'px'">
                                                                     <ng-container *ngFor="let user of userList"
                                                                         [value]="user.id">
                                                                         <div *ngIf="fg.get('userId').value == user.id">
-                                                                            <i class="fa fa-user">&nbsp;{{ user.username
-                                                                                }}</i>
+                                                                            <i class="fa fa-user"></i>&nbsp;{{
+                                                                            user.username
+                                                                            }}
                                                                         </div>
                                                                     </ng-container>
                                                                 </div>

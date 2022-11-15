@@ -42,18 +42,17 @@
                                                     <div class="grid-table">
                                                         <div class="thead">
                                                             <div class="tr">
+                                                                <td></td>
                                                                 <div class="td">Nombre</div>
                                                                 <div class="td">largo</div>
                                                                 <div class="td">Ancho</div>
                                                                 <div class="td">Forma</div>
-
                                                                 <div class="td">PosX</div>
                                                                 <div class="td">PosY</div>
-
                                                                 <div class="td">
-                                                                    <button class="btn btn-outline-success btn-sm"
-                                                                        (click)="addItemForm()">
-                                                                        <i class="fa fa-plus"></i> Nuevo
+                                                                    <button class="btn btn-secondary btn-sm"
+                                                                        (click)="generarQrs(area.id)">
+                                                                        <i class="fa fa-qrcode"></i>&nbsp;Mesas
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -64,6 +63,12 @@
                                                                 <form *ngIf="fg.get('areaId').value == areaSelected"
                                                                     class="tr" [formGroup]="fg"
                                                                     (submit)="recordSubmit(fg)">
+                                                                    <div class="td">
+                                                                        <button class="btn btn-secondary btn-sm"
+                                                                            (click)="generarQr(fg.get('id').value, fg.get('name').value)">
+                                                                            <i class="fa fa-qrcode"></i>
+                                                                        </button>
+                                                                    </div>
                                                                     <div class="td">
                                                                         <input class="form-control"
                                                                             formControlName="name">
@@ -98,7 +103,7 @@
                                                                     </div>
 
 
-                                                                    <div class="td">
+                                                                    <div class="td" style="white-space: nowrap;">
                                                                         <button type="submit" class="btn btn-sm"
                                                                             [disabled]="fg.invalid"
                                                                             [ngClass]="(fg.get('id').value > 0 ? 'btn-outline-info':'btn-success')">
@@ -152,3 +157,25 @@
         </div>
     </div>
 </div>
+
+
+<!-- open a modal window by clicking button  basic bootstrap--> 
+<div class="backdrop" [ngStyle]="{'display':display}"></div>
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+ <div class="modal-dialog modal-dialog-scrollable" role="document" id="modaldiag">
+   <div class="modal-content">
+     <div class="modal-header">
+        <h4 class="modal-title">Código QR - Mesa</h4>
+       <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+       
+     </div>
+     <div class="modal-body" name="modalBody" id="modalBody"> 
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Cerrar</button>
+       <button type="button" class="btn btn-info" (click)="printQR()">Imprimir</button>
+     </div>
+   </div><!-- /.modal-content -->
+ </div><!-- /.modal-dialog -->
+</div><!-- /.modal !-->
+
