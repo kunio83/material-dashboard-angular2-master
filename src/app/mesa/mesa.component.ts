@@ -27,6 +27,10 @@ export class MesaComponent implements OnInit {
   notification = null;
   factMesas = 0;
 
+  display = 'none';
+  qrUrl ='';
+  htmlCont = '';
+
   constructor(
     private fb: UntypedFormBuilder,
     private mesaService: MesaService,
@@ -159,26 +163,113 @@ export class MesaComponent implements OnInit {
   
   @HostListener('window:resize', ['$event'])
     onResize(event) {
-      console.log(this.mesitas.nativeElement.offsetWidth);
-      console.log(this.mesitas.nativeElement.offsetHeight);
-      let clientWidth = document.getElementById('mesas').clientWidth;
-      this.factMesas = clientWidth / this.areaSelectedLength;
-      console.log(document.getElementById('mesas'));
-      console.log(document.getElementById('mesas').clientWidth);
+      if (document.getElementById('mesas').clientWidth > 0) {
+        let clientWidth = document.getElementById('mesas').clientWidth;
+        this.factMesas = clientWidth / this.areaSelectedLength;
+        console.log(document.getElementById('mesas'));
+        console.log(document.getElementById('mesas').clientWidth);
+      }
     }
-
-//Master_rama
-  @ViewChild('mesitas')
-  mesitas: ElementRef;
-  
   
   //Facundo_rama
     ngAfterViewChecked() {
-      if (document.getElementById('mesas')) {
+      if (document.getElementById('mesas').clientWidth > 0) {
         let clientWidth = document.getElementById('mesas').clientWidth;
         this.factMesas = clientWidth / this.areaSelectedLength;        
       }
   }
-  
 
+  generarQr(mesaId: string, mesaName: string) {
+    document.getElementById('modaldiag').setAttribute('style', 'max-width: 500px');
+    document.getElementById('modalBody').innerHTML= 
+      `<span style="color: #00bcd4; font-size:120px">
+          <i class="fa fa-spinner fa-spin"></i>
+      </span>`;
+
+    
+
+    var settings = {
+      "url": "https://ezequielm.qrc.es/api/short?secretkey=1c1cf028a8cdde3231137939b839978d&url=" + mesaId  +"&static=1",
+      "method": "GET",
+      "timeout": 0,
+    };
+    
+    
+    $.ajax(settings).done(function (response) {
+      this.qrUrl = response.result.qr;
+      console.log(this.qrUrl);
+
+      document.getElementById('modalBody').innerHTML= 
+        `<img src="` + this.qrUrl + `">
+        <h3><strong> Mesa: `+ mesaName + `</h3></strong>`;
+      
+    });
+
+    this.openModal();
+    
+
+  }
+
+  generarQrs(areaId) {
+
+    document.getElementById('modaldiag').setAttribute('style', 'max-width: 80vw');
+    document.getElementById('modalBody').innerHTML= 
+      `<span style="color: #00bcd4; font-size:120px">
+          <i class="fa fa-spinner fa-spin"></i>
+      </span>`;
+
+    this.htmlCont = '';
+    var data = '<div class="row">';
+    this.itemForms.controls.forEach((item: any) => {
+      if (item.value.areaId == areaId) {
+
+        var settings = {
+          "url": "https://ezequielm.qrc.es/api/short?secretkey=1c1cf028a8cdde3231137939b839978d&url=" + item.value.id  +"&static=1",
+          "method": "GET",
+          "timeout": 0,
+        };
+        
+        
+        $.ajax(settings).done(function (response) {
+          this.qrUrl = response.result.qr;
+          console.log(this.qrUrl);
+          data+=`<div class="col">
+                      <img src="` + this.qrUrl + `">
+                      <h3><strong> Mesa: `+ item.value.name + `</h3></strong>
+                    </div>`;
+          console.log(data);
+          
+          document.getElementById('modalBody').innerHTML= data;
+        });
+      }
+    });
+
+    
+    this.openModal();
+    
+  }
+
+  stackHtmlCont(data: string){
+    this.htmlCont += data;
+    console.log(this.htmlCont);
+  }
+
+
+  openModal(){
+    this.display='block';
+ }
+
+ onCloseHandled(){
+  this.display='none';
+}
+
+printQR() {
+
+  document.body.setAttribute('style', 'visibility: hidden');
+  document.getElementById('modalBody').setAttribute('style', 'visibility: visible');
+  
+  window.print();
+  document.body.setAttribute('style', 'visibility: visible');
+}
+  
 }

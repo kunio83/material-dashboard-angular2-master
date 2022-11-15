@@ -68,33 +68,34 @@
                                             {{ dateDiff(itemserv.orderTime) }}
                                         </td>
                                         <td>
-                                            <span *ngIf="itemserv.itemStateId == 1" style="color: rgb(231, 85, 17)">
+                                            <span class= "estado" *ngIf="itemserv.itemStateId == 1" style="background-color: rgb(231, 85, 17)">
                                                 <i class="fa fa-clock-o" ></i>
                                                 Solicitado
                                             </span>
-                                            <span *ngIf="itemserv.itemStateId == 2" style="color: #00bcd4">
+                                            <span class= "estado"  *ngIf="itemserv.itemStateId == 2" style="background-color: #00bcd4">
                                                 <i class="fa fa-spinner fa-spin"></i>
                                                 En Progreso
                                             </span>
-                                            <span *ngIf="itemserv.itemStateId == 3" style="color: rgb(15, 190, 38)">
+                                            <span class= "estado"  *ngIf="itemserv.itemStateId == 3" style="background-color: rgb(15, 190, 38)">
                                                 <i class="fa fa-check-circle"></i>
                                                 Listo
                                             </span>
-                                            <span *ngIf="itemserv.itemStateId == 4" style="color: rgb(78, 78, 78)">
+                                            <span class= "estado"  *ngIf="itemserv.itemStateId == 4" style="background-color: rgb(78, 78, 78)">
                                                 <i class="fa fa-cutlery"></i>
                                                 Entregado
                                             </span>
                                         </td>
-                                        <td>
-                                            <button *ngIf="itemserv.itemStateId == 1" class="btn btn-info btn-sm" (click)="updateItemState(itemserv, 2)" style="width: 100%;">
-                                                <i class="fa fa-spinner fa-spin"></i>
+                                        <td style="white-space: nowrap;">
+                                            <i class="fa fa-arrow-right" aria-hidden="true"></i>&nbsp;&nbsp;
+                                            <button *ngIf="itemserv.itemStateId == 1" class="btn btn-secondary btn-sm" (click)="updateItemState(itemserv, 2)" style="width: 90%;">
+                                                <i class="fa fa-spinner"></i>
                                                 &nbsp;En Progreso
                                             </button>
-                                            <button *ngIf="itemserv.itemStateId == 2" class="btn btn-success btn-sm" (click)="updateItemState(itemserv, 3)" style="width: 100%;">
+                                            <button *ngIf="itemserv.itemStateId == 2" class="btn btn-secondary btn-sm" (click)="updateItemState(itemserv, 3)" style="width: 90%;">
                                                 <i class="fa fa-check-circle"></i>
                                                 &nbsp;Listo
                                             </button>
-                                            <button *ngIf="itemserv.itemStateId == 3" class="btn btn-secondary btn-sm" (click)="updateItemState(itemserv, 4)" style="width: 100%;">
+                                            <button *ngIf="itemserv.itemStateId == 3" class="btn btn-secondary btn-sm" (click)="updateItemState(itemserv, 4)" style="width: 90%;">
                                                 <i class="fa fa-cutlery"></i>
                                                 &nbsp;Entregado
                                             </button>

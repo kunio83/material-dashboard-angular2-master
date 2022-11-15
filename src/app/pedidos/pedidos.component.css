@@ -1,0 +1,13 @@
+.estado{
+    color: white;
+    padding: 5px;
+    width: 100%;
+    border-radius: 10px;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-secondary{
+    background-color: #616161;
+    color: white;
+}

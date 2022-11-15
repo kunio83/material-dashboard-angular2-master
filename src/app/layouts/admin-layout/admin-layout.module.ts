@@ -55,7 +55,7 @@ import { BusinessConfigComponent } from 'app/businessConfig/businessConfig.compo
     MesaServComponent,
     ServiciosComponent,
     PedidosComponent,
-    BusinessConfigComponent,
+    BusinessConfigComponent
   ]
 })
 

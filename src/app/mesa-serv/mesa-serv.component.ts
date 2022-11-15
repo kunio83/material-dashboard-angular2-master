@@ -1,10 +1,13 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Area } from 'app/models/area';
+import { TableService } from 'app/models/tableService';
 import { AreaService } from 'app/services/area.service';
 import { MesaEstadoService } from 'app/services/mesa-estado.service';
 import { MesaFormaService } from 'app/services/mesa-forma.service';
 import { MesaService } from 'app/services/mesa.service';
+import { TableServiceService } from 'app/services/table-service.service';
 import { UserService } from 'app/services/user.service';
 import { environment } from 'environments/environment';
 
@@ -32,7 +35,9 @@ export class MesaServComponent implements OnInit {
     private mesaService: MesaService,
     private userService: UserService,
     private mesaEstadoService: MesaEstadoService,
-    private areaService: AreaService
+    private areaService: AreaService,
+    private mesaServiceService: TableServiceService,
+    private router: Router
   ) { }
 
 
@@ -117,7 +122,7 @@ export class MesaServComponent implements OnInit {
     this.areaSelectedLength = this.areaList.find(x => x.id == areaId).length;
     this.areaSelectedWidth = this.areaList.find(x => x.id == areaId).width;
     let clientWidth = document.getElementById('mesas').clientWidth;
-    
+
     if (document.getElementById('mesas').clientWidth > 0) {
       this.factMesas = clientWidth / this.areaSelectedLength;
       console.log(document.getElementById('mesas').clientWidth);
@@ -148,5 +153,26 @@ export class MesaServComponent implements OnInit {
       let clientWidth = document.getElementById('mesas').clientWidth;
       this.factMesas = clientWidth / this.areaSelectedLength;
     }
+  }
+
+
+  abrirMesa() {
+    let comensales = (document.getElementById("comensales") as HTMLInputElement).valueAsNumber;
+
+    let tableService: TableService = new TableService();
+    tableService.tableId = this.mesaSelected;
+    tableService.userId = this.itemForms.value.find(i => i.id === this.mesaSelected).userId;
+    tableService.tenantId = environment.tenantId;
+    tableService.serviceStateId = 1;
+    tableService.dinerUserId = 0;
+    tableService.diners = comensales;
+    tableService.items = [];
+    tableService.serviceStart = new Date();
+
+    this.mesaServiceService.postTableService(tableService).subscribe(res => {
+      console.log(res);
+    });
+
+    this.router.navigateByUrl('/servicios');
   }
 }
