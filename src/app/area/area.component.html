@@ -31,11 +31,26 @@
                                 <form class="tr" [formGroup]="fg" *ngFor="let fg of itemForms.controls; let i = index"
                                 (submit)="recordSubmit(fg)">
                                     <div class="td">
-                                        <input class="form-control" formControlName="name">
+                                        <div class="control">
+                                        <input class="form-control" 
+                                            [class.is-danger] = "fg.get('name').dirty && fg.get('name').invalid"
+                                            formControlName="name">
+                                        </div>
+                                        <p class="help is-danger" *ngIf="fg.get('name').errors && fg.get('name').invalid">
+                                            El nombre es requerido
                                     </div>
 
                                     <div class="td">
-                                        <input class="form-control" formControlName="length">
+                                        <div class="control">
+                                        <input class="form-control" 
+                                            [class.is-danger] = "fg.get('length').dirty && fg.get('length').invalid"
+                                            formControlName="length">
+                                        </div>
+                                        <div>
+                                            <p class="help is-danger" *ngIf="fg.get('length').errors && fg.get('length').invalid">
+                                                El largo es requerido y debe ser numérico
+                                            </p>
+                                        </div>
                                     </div>
                                     
                                     <div class="td">
