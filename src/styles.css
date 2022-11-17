@@ -92,4 +92,7 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
 .form-check .form-check-label {
 	position: unset;
 }
-
+.rojito{
+	color: #e53935;
+	font-size: small;
+}

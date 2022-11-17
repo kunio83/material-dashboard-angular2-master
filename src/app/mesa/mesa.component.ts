@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Area } from 'app/models/area';
 import { AreaService } from 'app/services/area.service';
 import { MesaEstadoService } from 'app/services/mesa-estado.service';
@@ -69,7 +69,7 @@ export class MesaComponent implements OnInit {
               id: [item.id],
               tenantId: [item.tenantId],
               areaId: [item.areaId],
-              name: [item.name],
+              name: [item.name,Validators.required],
               length: [item.length],
               width: [item.width],
               shapeId: [item.shapeId],
@@ -89,7 +89,7 @@ export class MesaComponent implements OnInit {
       id: [0],
       tenantId: [environment.tenantId],
       areaId: [this.areaSelected],
-      name: [''],
+      name: ['',Validators.required],
       length: [1],
       width: [1],
       shapeId: [1],

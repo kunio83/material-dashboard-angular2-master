@@ -37,7 +37,7 @@
                                             formControlName="name">
                                         </div>
                                         <p class="help is-danger" *ngIf="fg.get('name').errors && fg.get('name').invalid">
-                                            El nombre es requerido
+                                            <a class="rojito">El nombre es requerido</a> 
                                     </div>
 
                                     <div class="td">
@@ -48,15 +48,23 @@
                                         </div>
                                         <div>
                                             <p class="help is-danger" *ngIf="fg.get('length').errors && fg.get('length').invalid">
-                                                El largo es requerido y debe ser numérico
+                                               <a class="rojito">El largo es requerido y debe ser numérico</a>
                                             </p>
                                         </div>
                                     </div>
                                     
                                     <div class="td">
-                                        <input class="form-control" formControlName="width">
+                                        <div class="control">
+                                        <input class="form-control"
+                                            [class.is-danger] = "fg.get('width').dirty && fg.get('width').invalid"
+                                            formControlName="width">
+                                        </div>
+                                        <div>
+                                        <p class="help is-danger" *ngIf="fg.get('width').errors && fg.get('width').invalid">
+                                            <a class="rojito">El ancho es requerido y debe ser numérico</a>
+                                        </p>
+                                        </div>
                                     </div>
-                                    
                                     <div class="td">
                                         <input class="form-control" formControlName="summary">
                                     </div>

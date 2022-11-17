@@ -31,11 +31,11 @@ export class AreaComponent implements OnInit {
               name: [item.name, Validators.required],
               length: [item.length, Validators.compose([
                 Validators.required, 
-                Validators.pattern(/^[0-9]$/)
+                Validators.pattern(/^[0-9]+$/)
               ])],
               width: [item.width, Validators.compose([
                 Validators.required,
-                Validators.pattern(/^[0-9]$/)
+                Validators.pattern(/^[0-9]+$/)
               ])],
               summary: [item.summary]
             }));
@@ -52,8 +52,8 @@ export class AreaComponent implements OnInit {
       name: ['', Validators.required],
       length: ['', Validators.compose([
         Validators.required, 
-        Validators.pattern(/^[0-9]$/)])],
-      width: ['', Validators.required, Validators.pattern(/^[0-9]$/)],
+        Validators.pattern(/^[0-9]+$/)])],
+      width: ['', Validators.required, Validators.pattern(/^[0-9]+$/)],
       summary: ['']
     }));
   }

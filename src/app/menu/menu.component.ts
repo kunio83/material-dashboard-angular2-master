@@ -49,10 +49,12 @@ export class MenuComponent implements OnInit {
               tenantId: [item.tenantId],
               code: [item.code, Validators.required],
               itemCategoryId: [item.itemCategoryId, Validators.required],
-              kitchenId: [item.kitchenId],
+              kitchenId: [item.kitchenId, Validators.required],
               title: [item.title, Validators.required],
               summary: [item.summary],
-              price: [item.price, Validators.required],
+              price: [item.price, Validators.compose([
+                                  Validators.required,
+                                  Validators.pattern(/^[0-9]+$/)])],  
               active: [item.active]      
             }));
           });
@@ -68,10 +70,12 @@ export class MenuComponent implements OnInit {
       tenantId: [environment.tenantId],
       code: ['', Validators.required],
       itemCategoryId: ['', Validators.required],
-      kitchenId: [''],
+      kitchenId: ['', Validators.required],
       title: ['', Validators.required],
       summary: [''],
-      price: ['', Validators.required],
+      price: ['', Validators.compose([
+                  Validators.required,
+                  Validators.pattern(/^[0-9]+$/)])],
       active: [true]      
     }));
   }

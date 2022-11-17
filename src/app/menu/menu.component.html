@@ -47,38 +47,80 @@
                                         </ng-container>
                                     <form class="tr" [formGroup]="fg" (submit)="recordSubmit(fg)">
                                         <div class="td">
-                                            <input class="form-control" formControlName="code"
-                                            [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')">
+                                            <div class="form-group">
+                                                <input type="text" 
+                                                class="form-control" 
+                                                formControlName="code"
+                                                placeholder="Codigo"
+                                                [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')"
+                                                [class.is-danger] = "fg.get('code').errors && fg.get('code').invalid">
+                                            </div>                                            
+                                            <p class="help is-danger" *ngIf="fg.get('code').errors && fg.get('code').invalid">
+                                                <a class="rojito">El codigo es requerido</a>
                                         </div>
                                         <div class="td">
-                                            <select class="form-control" formControlName="itemCategoryId" 
-                                            [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')">
+                                            <div class="control">
+                                            <select class="form-control" 
+                                                    formControlName="itemCategoryId"
+                                                    [class.is-danger] = "fg.get('itemCategoryId').errors && fg.get('itemCategoryId').invalid"
+                                                    [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')">
                                                 <option *ngFor="let cat of categoryList" value="{{ cat.id }}">
                                                     {{ cat.name }}
                                                 </option>
                                             </select>
+                                            </div>
+                                            <div>
+                                                <p class="help is-danger" *ngIf="fg.get('itemCategoryId').errors && fg.get('itemCategoryId').invalid">
+                                                    <a class="rojito">Seleccione una categoría</a>
+                                            </div>
                                         </div>
                                         <div class="td">
-                                            <select class="form-control" formControlName="kitchenId"
+                                            <div class="control">
+                                            <select class="form-control" 
+                                            formControlName="kitchenId"
+                                            [class.is-danger] = "fg.get('kitchenId').errors && fg.get('kitchenId').invalid"
                                             [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')">
                                                 <option *ngFor="let kitchen of kitchenList" value="{{ kitchen.id }}">
                                                     {{ kitchen.name }}
                                                 </option>
                                             </select>
+                                            </div>
+                                            <div>
+                                                <p class="help is-danger" *ngIf="fg.get('kitchenId').errors && fg.get('kitchenId').invalid">
+                                                    <a class="rojito">Seleccione una cocina</a>
+                                            </div>
                                         </div>
                                         <div class="td">
-                                            <input class="form-control" formControlName="title"
+                                            <div class="control">
+                                            <input class="form-control"
+                                            formControlName="title"
+                                            placeholder="Titulo"
+                                            [class.is-danger] = "fg.get('title').errors && fg.get('title').invalid"
                                             [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')">
-                                        </div>
+                                            </div>
+                                            <div>
+                                                <p class="help is-danger" *ngIf="fg.get('title').errors && fg.get('title').invalid">
+                                                    <a class="rojito">El nombre del producto es requerido</a>
+                                            </div>
+                                        </div>  
                                         <div class="td">
                                             <input class="form-control" formControlName="summary"
                                             [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')">
                                         </div>
                                         <div class="td" >
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text">$</span>
-                                                <input class="form-control" formControlName="price" style="text-align:right"
-                                                [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')">
+                                            <div class="control">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text">$</span>
+                                                    <input class="form-control" 
+                                                    formControlName="price" 
+                                                    style="text-align:right"
+                                                    [Class.is-danger]= "fg.get('price').errors && fg.get('price').invalid"
+                                                    [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')">
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <p class="help is-danger" *ngIf= "fg.get('price').errors && fg.get('price').invalid">
+                                                    <a class="rojito" style="text-align:center">El precio es requerido</a>
                                             </div>
                                         </div>
                                         <div class="td" style="text-align:center">                                        
