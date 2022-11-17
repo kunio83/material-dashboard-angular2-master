@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { environment } from 'environments/environment';
 import { CocinaService } from 'app/services/cocina.service';
+import { UserService } from 'app/services/user.service';
+import { User } from 'app/models/user';
+import { Kitchen } from 'app/models/kitchen';
+
 
 @Component({
   selector: 'cocina',
@@ -11,11 +15,24 @@ import { CocinaService } from 'app/services/cocina.service';
 export class CocinaComponent implements OnInit {
   itemForms: UntypedFormArray = this.fb.array([]);
   notification = null;
+  userList: User[];
+  kitchenList: Kitchen[];
+  selectedKitchen = null;
+  listUsers = [];
 
   constructor(private fb: UntypedFormBuilder,
-    private cocinaService: CocinaService) { }
+    private cocinaService: CocinaService,
+    private userService: UserService) { }
+
 
   ngOnInit(): void {
+
+    this.cocinaService.getCocinaLista(environment.tenantId)
+      .subscribe(res => this.kitchenList = res as []);
+
+    this.userService.getUserLista(environment.tenantId)
+      .subscribe(res => this.userList = res as []);
+
     this.cocinaService.getCocinas(environment.tenantId).subscribe(
       res => {
         if (res.length == 0) {
@@ -27,21 +44,23 @@ export class CocinaComponent implements OnInit {
               id: [item.id],
               tenantId: [item.tenantId],
               name: [item.name, Validators.required],
-              summary: [item.summary]
+              summary: [item.summary],
+              users: [item.users]
             }));
           });
         }
       });
-      console.log(this.itemForms);
+
   }
-  
+
 
   addItemForm() {
     this.itemForms.push(this.fb.group({
       id: [0],
       tenantId: [environment.tenantId],
       name: ['', Validators.required],
-      summary: ['']
+      summary: [''],
+      users: [[]]
     }));
   }
 
@@ -74,20 +93,74 @@ export class CocinaComponent implements OnInit {
       );
   }
 
-  showNotification(categoria){
-    switch(categoria){
+  chngCoc(evt) {
+    this.selectedKitchen = evt;
+    this.listUsers = [];
+    this.userList.forEach((user: any) => {
+      this.listUsers.push({ id: user.id, username: user.username, selected: false });
+    });
+
+    this.kitchenList.filter((kitchen: any) => {
+      if (kitchen.id == evt) {
+        kitchen.users.forEach((usercoc: any) => {
+          this.listUsers.forEach((user: any) => {
+            if (user.id == usercoc.id) {
+              user.selected = true;
+            }
+          });
+        });
+      }
+    });
+
+
+  }
+
+  chngUser(id) {
+    this.listUsers.forEach((user: any) => {
+      if (user.id == id) {
+        user.selected = !user.selected;
+      }
+    });
+  }
+
+  saveUsers() {
+    let userSelected = [];
+    let kitchenSelected = this.kitchenList.filter(k => k.id == this.selectedKitchen)[0];
+
+    console.log(kitchenSelected);
+
+    this.userList.forEach((user: any) => {
+      this.listUsers.forEach((userlist: any) => {
+        if (user.id == userlist.id && userlist.selected == true) {
+          userSelected.push(user);
+        }
+      });
+    });
+
+    
+    kitchenSelected.users = userSelected;  
+
+    this.cocinaService.putCocina(kitchenSelected).subscribe(
+      (res: any) => {
+        this.showNotification('update');
+      }
+    );
+  }
+
+  showNotification(categoria) {
+    switch (categoria) {
       case 'insert':
-        this.notification = {class: 'text-success', message: 'Guardado Exitosamente'};
+        this.notification = { class: 'text-success', message: 'Guardado Exitosamente' };
         break;
       case 'update':
-        this.notification = {class: 'text-primary', message: 'Actualizado Exitosamente'};
+        this.notification = { class: 'text-primary', message: 'Actualizado Exitosamente' };
         break;
       case 'delete':
-        this.notification = {class: 'text-danger', message: 'Eliminado Exitosamente'};
+        this.notification = { class: 'text-danger', message: 'Eliminado Exitosamente' };
         break;
     }
     setTimeout(() => {
       this.notification = null;
-    },2000);
+    }, 2000);
   }
 }

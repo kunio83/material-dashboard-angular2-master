@@ -42,7 +42,12 @@
                                                     <div class="grid-table">
                                                         <div class="thead">
                                                             <div class="tr">
-                                                                <td></td>
+                                                                <div class="td">
+                                                                    <button class="btn btn-secondary btn-sm"
+                                                                        (click)="generarQrs(area.id)">
+                                                                        <i class="fa fa-qrcode"></i>
+                                                                    </button>
+                                                                </div>
                                                                 <div class="td">Nombre</div>
                                                                 <div class="td">largo</div>
                                                                 <div class="td">Ancho</div>
@@ -50,11 +55,12 @@
                                                                 <div class="td">PosX</div>
                                                                 <div class="td">PosY</div>
                                                                 <div class="td">
-                                                                    <button class="btn btn-secondary btn-sm"
-                                                                        (click)="generarQrs(area.id)">
-                                                                        <i class="fa fa-qrcode"></i>&nbsp;Mesas
+                                                                    <button class="btn btn-outline-success btn-sm"
+                                                                        (click)="addItemForm()">
+                                                                        <i class="fa fa-plus"></i> Nuevo
                                                                     </button>
                                                                 </div>
+
                                                             </div>
                                                         </div>
                                                         <div class="tbody">
