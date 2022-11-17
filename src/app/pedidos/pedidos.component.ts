@@ -20,7 +20,7 @@ export class PedidosComponent implements OnInit {
   notification = null;
   cocinaList: any[];
   itemStateList: any[];
-  tableList: any[];
+  tableList: any[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -33,6 +33,8 @@ export class PedidosComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.tableService2ItemService.refrestInProgressItems(environment.tenantId);
+    
     this.tableService2ItemService.getInProgressItems(environment.tenantId).subscribe(
       res => { this.pedidoList = res as TableService2Item[]; });
 
