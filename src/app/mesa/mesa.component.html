@@ -77,20 +77,25 @@
                                                                     </div>
                                                                     <div class="td">
                                                                         <input class="form-control"
-                                                                        [class.is-danger] = "fg.get('name').errors && fg.get('name').invalid"
+                                                                            [class.is-danger]="fg.get('name').errors && fg.get('name').invalid"
                                                                             formControlName="name">
-                                                                        </div>
-                                                                        <p class="help is-danger" *ngIf="fg.get('name').errors && fg.get('name').invalid">
-                                                                            <a class="rojito">El nombre es obligatorio</a>
+                                                                        <p class="help is-danger"
+                                                                            *ngIf="fg.get('name').errors && fg.get('name').invalid">
+                                                                            <a class="rojito">El nombre es
+                                                                                obligatorio</a>
                                                                         </p>
                                                                     </div>
                                                                     <div class="td">
                                                                         <input class="form-control"
-                                                                            formControlName="length" type="number" min="1" max="{{ areaSelectedLength  - fg.get('posX').value}}">
+                                                                            formControlName="length" type="number"
+                                                                            min="1"
+                                                                            max="{{ areaSelectedLength  - fg.get('posX').value}}">
                                                                     </div>
                                                                     <div class="td">
                                                                         <input class="form-control"
-                                                                            formControlName="width" type="number" min="1" max="{{ areaSelectedWidth - fg.get('posY').value}}">
+                                                                            formControlName="width" type="number"
+                                                                            min="1"
+                                                                            max="{{ areaSelectedWidth - fg.get('posY').value}}">
                                                                     </div>
 
                                                                     <div class="td">
@@ -106,11 +111,13 @@
 
                                                                     <div class="td">
                                                                         <input class="form-control"
-                                                                            formControlName="posX" type="number" min="1" max="{{ areaSelectedLength - 1}}">
+                                                                            formControlName="posX" type="number" min="1"
+                                                                            max="{{ areaSelectedLength - 1}}">
                                                                     </div>
                                                                     <div class="td">
                                                                         <input class="form-control"
-                                                                            formControlName="posY" type="number" min="1" max="{{ areaSelectedWidth - 1}}">
+                                                                            formControlName="posY" type="number" min="1"
+                                                                            max="{{ areaSelectedWidth - 1}}">
                                                                     </div>
 
 
@@ -133,12 +140,10 @@
                                             </div>
                                         </div>
                                         <div class="col-md-7" style="padding:0">
-                                            <div id="mesas" class="fndmesas"
-                                            #mesitas
-                                            [style.background-size]="factMesas + 'px'"
-                                            [style.background-position-x]="-factMesas/2 + 'px'"
-                                            [style.background-position-y]="-factMesas/2 + 'px'"
-                                            >
+                                            <div id="mesas" class="fndmesas" #mesitas
+                                                [style.background-size]="factMesas + 'px'"
+                                                [style.background-position-x]="-factMesas/2 + 'px'"
+                                                [style.background-position-y]="-factMesas/2 + 'px'">
                                                 <div class="contmesas"
                                                     [style.height]="areaSelectedWidth * factMesas + 'px'">
                                                     <ng-container *ngFor="let fg of itemForms.controls; let i = index">
@@ -170,23 +175,23 @@
 </div>
 
 
-<!-- open a modal window by clicking button  basic bootstrap--> 
+<!-- open a modal window by clicking button  basic bootstrap-->
 <div class="backdrop" [ngStyle]="{'display':display}"></div>
-<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
- <div class="modal-dialog modal-dialog-scrollable" role="document" id="modaldiag">
-   <div class="modal-content">
-     <div class="modal-header">
-        <h4 class="modal-title">Código QR - Mesa</h4>
-       <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
-       
-     </div>
-     <div class="modal-body" name="modalBody" id="modalBody"> 
-     </div>
-     <div class="modal-footer">
-       <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Cerrar</button>
-       <button type="button" class="btn btn-info" (click)="printQR()">Imprimir</button>
-     </div>
-   </div><!-- /.modal-content -->
- </div><!-- /.modal-dialog -->
-</div><!-- /.modal !-->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog modal-dialog-scrollable" role="document" id="modaldiag">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Código QR - Mesa</h4>
+                <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span
+                        aria-hidden="true">&times;</span></button>
 
+            </div>
+            <div class="modal-body" name="modalBody" id="modalBody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="onCloseHandled()">Cerrar</button>
+                <button type="button" class="btn btn-info" (click)="printQR()">Imprimir</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal !-->

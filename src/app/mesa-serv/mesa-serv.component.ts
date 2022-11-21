@@ -171,8 +171,8 @@ export class MesaServComponent implements OnInit {
 
     this.mesaServiceService.postTableService(tableService).subscribe(res => {
       console.log(res);
+      this.router.navigateByUrl('/servicios');
     });
-
-    this.router.navigateByUrl('/servicios');
+    
   }
 }

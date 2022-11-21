@@ -48,9 +48,19 @@ export class PedidosComponent implements OnInit {
 
     this.tableService2ItemService.refrestInProgressItems(environment.tenantId);
 
-    this.tableService2ItemService.getInProgressItems(environment.tenantId).subscribe(
-      res => { this.pedidoList = res as TableService2Item[];});
+    
 
+    if(this.cocinaLogin)
+    {
+      this.tableService2ItemService.getInProgressbyKitchen(this.cocinaLogin).subscribe(
+      res => { this.pedidoList = res as TableService2Item[]; });
+    }
+    else
+    {
+      this.tableService2ItemService.getInProgressItems(environment.tenantId).subscribe(
+      res => { this.pedidoList = res as TableService2Item[];});
+    }
+    
     this.tableService.getMesas(environment.tenantId).subscribe(
       res => { this.tableList = res as []; });
     
@@ -60,7 +70,8 @@ export class PedidosComponent implements OnInit {
     this.kitchenService.getCocinaLista(environment.tenantId).subscribe(
       res => { 
         this.cocinaList = res as []; 
-        if(this.cocinaLogin != 0)
+        console.log(this.cocinaLogin);
+        if(this.cocinaLogin)
         {
           this.cocinaList = this.cocinaList.filter(c => c.id == this.cocinaLogin);
           console.log(this.cocinaList);

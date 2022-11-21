@@ -15,7 +15,8 @@
                             <div class="nav-tabs-wrapper">
                                 <span class="nav-tabs-title">Cocina: </span>
                                 <ul class="nav nav-tabs" data-tabs="tabs">
-                                        <li class="nav-item">
+
+                                        <li class="nav-item" *ngIf="cocinaLogin ==0">
                                             <a mat-button class="nav-link" href="javascipt:;" data-toggle="tab"
                                                 (click)="selectCocina(0)" active>
                                                 <i class="material-icons">domain</i> Todas
