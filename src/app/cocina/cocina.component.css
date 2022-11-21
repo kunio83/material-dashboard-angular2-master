@@ -1,0 +1,10 @@
+tr {
+    border-bottom: 1px solid #cdcbcb;
+    line-height: 2.5rem;
+    vertical-align: middle;
+
+}
+
+td{
+    border-bottom: inherit;
+}

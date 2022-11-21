@@ -11,8 +11,8 @@ export class BusinessConfigService {
 
     constructor(private httpClient: HttpClient) { }
 
-    getBusinessConfig(tenantId: number): Observable<BusinessConfig[]> {
-        return this.httpClient.get<BusinessConfig[]>(environment.apiBaseURI + 'BusinessConfig?tenantId=' + tenantId);
+    getBusinessConfig(tenantId: number): Observable<BusinessConfig> {
+        return this.httpClient.get<BusinessConfig>(environment.apiBaseURI + 'BusinessConfig/' + tenantId);
     }
     postBusinessConfig(formData) {
         return this.httpClient.post(environment.apiBaseURI + 'BusinessConfig', formData);

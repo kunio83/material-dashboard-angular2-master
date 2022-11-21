@@ -79,7 +79,10 @@ export class ServiciosComponent implements OnInit {
             userId: [serv.userId],
             serviceStateId: [serv.serviceStateId],
             serviceStart: [serv.serviceStart],
-            serviceEnd: [serv.serviceEnd]
+            serviceEnd: [serv.serviceEnd],
+            paymentMethod: [serv.paymentMethod],
+            paymentReference: [serv.paymentReference],
+            comment: [serv. comment]
           }));
         });
       });
@@ -226,6 +229,17 @@ export class ServiciosComponent implements OnInit {
   changeItem(id: number, i:number){
     this.itemForms.controls[i].patchValue({price: this.itemList.find(x => x.id == id).price});
     this.updateTotal();
+  }
+
+  changePayment($event, fg: FormGroup)
+  {
+    let paymentMethod = $event.target.value;
+    if (paymentMethod == "efectivo" || paymentMethod == "mercadopago")
+    {
+      console.log(fg.controls);
+      //fg.controls.serviceStateId.value = 4;
+    }
+    
   }
 
 

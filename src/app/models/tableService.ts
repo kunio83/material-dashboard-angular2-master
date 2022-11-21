@@ -10,5 +10,8 @@ export class TableService{
     serviceStateId: number;
     serviceStart: Date;
     serviceEnd: Date;
+    paymentMethod: string;
+    paymentReference: string;
+    comment: string;
     items: Item[];
 }

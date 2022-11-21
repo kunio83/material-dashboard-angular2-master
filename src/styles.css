@@ -34,9 +34,11 @@ body{
 	display:table-cell;
 	padding: 10px 1px 10px 5px;
 }
+
 .thead div.tr div.td:last-child{
-    background-color: #fff;
+    /*background-color: #fff;*/
 }
+
 i:hover{
 	cursor: pointer;
 }

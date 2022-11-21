@@ -1,0 +1,46 @@
+.image-wrap {
+    padding: 10px;
+    border: solid 1px #e0e0e0;
+    display: inline-block;
+}
+
+.img-space {
+    border: dashed 1px #d3d3d3;
+    border-radius: 8px;
+    background-color: #f2f2f2;
+    height: auto;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+}
+
+.img-space img {
+    display: block;
+    /*width: 100%;*/
+    height: 100%;
+    margin: auto;
+    cursor: pointer;
+}
+
+.fileInputProfileWrap {
+    width: 100%;
+    height: auto;
+}
+
+.fileInputProfile {
+    position: absolute !important;
+    height: 100% !important;
+    width: 100% !important;
+    z-index: 99 !important;
+    opacity: 0 !important;
+    cursor: pointer;
+}
+.fileInputProfile[disabled] + .img-space{
+    pointer-events: none;
+    cursor: not-allowed!important;
+}
+
+
+.td{
+    vertical-align: middle !important;
+}
