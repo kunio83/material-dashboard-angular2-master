@@ -77,7 +77,12 @@
                                                                     </div>
                                                                     <div class="td">
                                                                         <input class="form-control"
+                                                                        [class.is-danger] = "fg.get('name').errors && fg.get('name').invalid"
                                                                             formControlName="name">
+                                                                        </div>
+                                                                        <p class="help is-danger" *ngIf="fg.get('name').errors && fg.get('name').invalid">
+                                                                            <a class="rojito">El nombre es obligatorio</a>
+                                                                        </p>
                                                                     </div>
                                                                     <div class="td">
                                                                         <input class="form-control"

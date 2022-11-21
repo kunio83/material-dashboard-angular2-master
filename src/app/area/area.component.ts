@@ -29,8 +29,14 @@ export class AreaComponent implements OnInit {
               id: [item.id],
               tenantId: [item.tenantId],
               name: [item.name, Validators.required],
-              length: [item.length, Validators.required],
-              width: [item.width, Validators.required],
+              length: [item.length, Validators.compose([
+                Validators.required, 
+                Validators.pattern(/^[0-9]+$/)
+              ])],
+              width: [item.width, Validators.compose([
+                Validators.required,
+                Validators.pattern(/^[0-9]+$/)
+              ])],
               summary: [item.summary]
             }));
           });
@@ -44,8 +50,10 @@ export class AreaComponent implements OnInit {
       id: [0],
       tenantId: [environment.tenantId],
       name: ['', Validators.required],
-      length: ['', Validators.required],
-      width: ['', Validators.required],
+      length: ['', Validators.compose([
+        Validators.required, 
+        Validators.pattern(/^[0-9]+$/)])],
+      width: ['', Validators.required, Validators.pattern(/^[0-9]+$/)],
       summary: ['']
     }));
   }
@@ -93,6 +101,6 @@ export class AreaComponent implements OnInit {
     }
     setTimeout(() => {
       this.notification = null;
-    },2000);
+    },3000);
   }
 }

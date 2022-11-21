@@ -30,7 +30,14 @@
                                 <ng-container *ngFor="let fg of itemForms.controls; let i = index">
                                     <form class="tr" [formGroup]="fg" (submit)="recordSubmit(fg)">
                                         <div class="td">
-                                            <input class="form-control" formControlName="name">
+                                            <div class="control">
+                                                <input class="form-control" 
+                                                    [class.is-danger] = "fg.get('name').dirty && fg.get('name').invalid"
+                                                    formControlName="name">
+                                            </div>
+                                            <p class="help is-danger" *ngIf="fg.get('name').errors && fg.get('name').invalid">
+                                                <a class="rojito">El nombre es requerido</a>
+                                            </p>
                                         </div>
                                         <div class="td">
                                             <input class="form-control" formControlName="summary">
