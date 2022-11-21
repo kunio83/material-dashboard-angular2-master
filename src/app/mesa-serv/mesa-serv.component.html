@@ -83,23 +83,21 @@
                                                                             <option value="4">Reservada</option>
                                                                             <option value="5" selected>Limpiar</option>
                                                                         </ng-container>
-                                                                        <!--
-                                                                            <option *ngFor="let state of stateList"
-                                                                                [value]="state.id">
-                                                                                {{ state.name }}
-                                                                            </option>
-                                                                            -->
                                                                     </select>
                                                                 </div>
+
 
                                                                 <div class="form-group">
                                                                     <label>Mozo Asignado</label>
                                                                     <select class="form-control"
                                                                         formControlName="userId">
-                                                                        <option *ngFor="let user of userList"
-                                                                            [value]="user.id">
-                                                                            {{ user.username }}
-                                                                        </option>
+                                                                        <ng-container *ngFor="let user of userList">
+                                                                            <option *ngIf="user.roleId == 4"
+                                                                                [value]="user.id">
+                                                                                {{ user.username }}
+                                                                            </option>
+                                                                        </ng-container>
+
                                                                     </select>
                                                                 </div>
 
@@ -124,7 +122,9 @@
                                                                                     <div class="col-sm-6">
                                                                                         <input type="number" min="1"
                                                                                             value="2"
-                                                                                            class="form-control" id="comensales" name="comensales">
+                                                                                            class="form-control"
+                                                                                            id="comensales"
+                                                                                            name="comensales">
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

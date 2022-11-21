@@ -7,6 +7,7 @@ import { MesaService } from 'app/services/mesa.service';
 import { SignalrService } from 'app/services/signalr.service';
 import { TableService2ItemService } from 'app/services/table-service2-item.service';
 import { environment } from 'environments/environment';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'pedidos',
@@ -20,7 +21,9 @@ export class PedidosComponent implements OnInit {
   notification = null;
   cocinaList: any[];
   itemStateList: any[];
-  tableList: any[] = [];
+  tableList: any[];
+  cocinaLogin: 0;
+
 
   constructor(
     private fb: FormBuilder,
@@ -28,15 +31,25 @@ export class PedidosComponent implements OnInit {
     private itemStateService: ItemStateService,
     private kitchenService: CocinaService,
     private tableService: MesaService,
-    private signalRService: SignalrService
+    private signalRService: SignalrService,
+    private route: ActivatedRoute
   ) { }
 
 
   ngOnInit(): void {
+
+
+    this.route.queryParams
+    .subscribe(params => {
+      this.cocinaLogin = params.cocinaId;
+      console.log(this.cocinaLogin)
+    })
+  
+
     this.tableService2ItemService.refrestInProgressItems(environment.tenantId);
-    
+
     this.tableService2ItemService.getInProgressItems(environment.tenantId).subscribe(
-      res => { this.pedidoList = res as TableService2Item[]; });
+      res => { this.pedidoList = res as TableService2Item[];});
 
     this.tableService.getMesas(environment.tenantId).subscribe(
       res => { this.tableList = res as []; });
@@ -45,7 +58,14 @@ export class PedidosComponent implements OnInit {
       res => { this.itemStateList = res as []; });
 
     this.kitchenService.getCocinaLista(environment.tenantId).subscribe(
-      res => { this.cocinaList = res as []; });
+      res => { 
+        this.cocinaList = res as []; 
+        if(this.cocinaLogin != 0)
+        {
+          this.cocinaList = this.cocinaList.filter(c => c.id == this.cocinaLogin);
+          console.log(this.cocinaList);
+        };
+      });
   }
 
   getTableName(tableId: number) {

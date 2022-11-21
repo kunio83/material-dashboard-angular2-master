@@ -7,9 +7,9 @@
             </span>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header card-header-tabs card-header-primary">
+                    <div class="card-header card-header-primary">
                         <h4 class="card-title">Cocinas</h4>
                     </div>
                     <div class="card-body table-responsive">
@@ -18,14 +18,14 @@
                                 <div class="tr">
                                     <div class="td">Nombre</div>
                                     <div class="td">Descripcion</div>
-                                    
-                                    <div class="td" style= "width: 150px">
+
+                                    <div class="td" style="width: 150px">
                                         <button class="btn btn-outline-success btn-sm" (click)="addItemForm()">
                                             <i class="fa fa-plus"></i> Nuevo
                                         </button>
                                     </div>
                                 </div>
-                            </div>    
+                            </div>
                             <div class="tbody">
                                 <ng-container *ngFor="let fg of itemForms.controls; let i = index">
                                     <form class="tr" [formGroup]="fg" (submit)="recordSubmit(fg)">
@@ -36,12 +36,12 @@
                                             <input class="form-control" formControlName="summary">
                                         </div>
                                         <div class="td">
-                                            <button type="submit" class="btn btn-sm"
-                                            [disabled]="fg.invalid"
-                                            [ngClass]="(fg.get('id').value > 0 ? 'btn-outline-info':'btn-success')">
+                                            <button type="submit" class="btn btn-sm" [disabled]="fg.invalid"
+                                                [ngClass]="(fg.get('id').value > 0 ? 'btn-outline-info':'btn-success')">
                                                 <i class="fa fa-floppy-o"></i>
                                             </button>&nbsp;
-                                            <button class="btn btn-outline-danger btn-sm" (click)="onDelete(fg.get('id').value,i)"   >
+                                            <button class="btn btn-outline-danger btn-sm"
+                                                (click)="onDelete(fg.get('id').value,i)">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </div>
@@ -49,6 +49,55 @@
                                 </ng-container>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title">Asignacion Usuarios</h4>
+                    </div>
+
+
+
+
+
+                    <div class="card-body">
+                        <form>
+                            <label for="kitchen">Seleccione Cocina:</label>
+                            <select #cocinas class="form-control" formControlName="kitchen" (change)="chngCoc(cocinas.value)">
+                                <option *ngFor="let kitchen of kitchenList" value="{{ kitchen.id }}">
+                                    {{ kitchen.name }}
+                                </option>
+                            </select>
+                        </form>
+
+                        <div class="grid-table my-4">
+                            <div class="thead">
+                                <div class="tr">
+                                    <div class="td">Asignado</div>
+                                    <div class="td">Nombres</div>
+                                    <div class="td">Apellido</div>
+                                </div>
+                            </div>
+                            <div class="tbody">
+                                <ng-container *ngFor="let u of listUsers">
+                                    <tr *ngIf="u.role == 3">
+                                        <td>
+                                            <input type="checkbox" 
+                                            [checked]="u.selected" 
+                                            (change)="chngUser(u.id)">
+                                        </td>
+                                        <td>{{ u.firstNames }}</td>
+                                        <td>{{ u.lastName }}</td>
+                                    </tr>
+                                </ng-container>
+                             
+                            </div>
+                        </div>
+                        <button class="btn btn-info btn-sm float-right" (click)="saveUsers()">
+                            Guardar
+                        </button>
                     </div>
                 </div>
             </div>
