@@ -61,9 +61,6 @@ export class PedidosComponent implements OnInit {
           console.log(this.cocinaList);
         };
       });
-
-
-
   }
 
   getTableName(tableId: number) {
