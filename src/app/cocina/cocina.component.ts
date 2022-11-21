@@ -97,8 +97,10 @@ export class CocinaComponent implements OnInit {
     this.selectedKitchen = evt;
     this.listUsers = [];
     this.userList.forEach((user: any) => {
-      this.listUsers.push({ id: user.id, username: user.username, selected: false });
+      this.listUsers.push({ id: user.id, firstNames: user.firstNames, lastName: user.lastName, role: user.roleId, selected: false });
     });
+
+    console.log(this.listUsers);
 
     this.kitchenList.filter((kitchen: any) => {
       if (kitchen.id == evt) {

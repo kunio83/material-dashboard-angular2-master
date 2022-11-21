@@ -72,26 +72,30 @@
                             </select>
                         </form>
 
-                        <div class="grid-table">
+                        <div class="grid-table my-4">
                             <div class="thead">
                                 <div class="tr">
-                                    <div class="td"></div>
-                                    <div class="td">Usuario</div>
+                                    <div class="td">Asignado</div>
+                                    <div class="td">Nombres</div>
+                                    <div class="td">Apellido</div>
                                 </div>
                             </div>
                             <div class="tbody">
-                                <tr *ngFor="let u of listUsers">
-                                    <td>
-                                        <input type="checkbox" 
-                                        [checked]="u.selected" 
-                                        (change)="chngUser(u.id)">
-                                    </td>
-                                    <td>{{ u.username }}</td>
-                                </tr>
-
+                                <ng-container *ngFor="let u of listUsers">
+                                    <tr *ngIf="u.role == 3">
+                                        <td>
+                                            <input type="checkbox" 
+                                            [checked]="u.selected" 
+                                            (change)="chngUser(u.id)">
+                                        </td>
+                                        <td>{{ u.firstNames }}</td>
+                                        <td>{{ u.lastName }}</td>
+                                    </tr>
+                                </ng-container>
+                             
                             </div>
                         </div>
-                        <button class="btn btn-sucess btn-sm" (click)="saveUsers()">
+                        <button class="btn btn-info btn-sm float-right" (click)="saveUsers()">
                             Guardar
                         </button>
                     </div>

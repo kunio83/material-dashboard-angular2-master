@@ -64,6 +64,9 @@
                                         <div class="td">Mozo</div>
                                         <div class="td" style="width: 40px;">Comensales</div>
                                         <div class="td">Estado</div>
+                                        <div class="td">Metodo Pago</div>
+                                        <div class="td">Id Pago (MP)</div>
+                                        <div class="td">Comentarios</div>
                                         <div class="td" style="width: 40px;"></div>
                                     </div>
                                 </div>
@@ -92,6 +95,24 @@
                                                     </option>
                                                 </select>
                                             </div>
+
+                                            <div class="td py-0">
+                                                <select class="form-control" formControlName="paymentMethod" (change)="changePayment($event, fg)">
+                                                    <option value="mercadopago">
+                                                        mercadopago
+                                                    </option>
+                                                    <option value="efectivo">
+                                                        efectivo
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="td py-0">
+                                                <input class="form-control" formControlName="paymentReference">
+                                            </div>
+                                            <div class="td py-0">
+                                                <input class="form-control" formControlName="comment">
+                                            </div>
+
 
                                             <div class="td py-0">
                                                 <button type="submit" class="btn btn-sm btn-outline-info">
