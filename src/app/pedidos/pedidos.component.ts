@@ -24,6 +24,7 @@ export class PedidosComponent implements OnInit {
   tableList: any[];
   cocinaLogin: 0;
 
+
   constructor(
     private fb: FormBuilder,
     private tableService2ItemService: TableService2ItemService,
@@ -37,12 +38,16 @@ export class PedidosComponent implements OnInit {
 
   ngOnInit(): void {
 
+
     this.route.queryParams
     .subscribe(params => {
       this.cocinaLogin = params.cocinaId;
       console.log(this.cocinaLogin)
     })
   
+
+    this.tableService2ItemService.refrestInProgressItems(environment.tenantId);
+
     this.tableService2ItemService.getInProgressItems(environment.tenantId).subscribe(
       res => { this.pedidoList = res as TableService2Item[];});
 

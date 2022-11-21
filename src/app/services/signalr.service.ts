@@ -1,3 +1,4 @@
+import { ItemStateService } from 'app/services/item-state.service';
 import { Injectable } from '@angular/core';
 import * as signalR from '@aspnet/signalr';
 import { ToastrService } from 'ngx-toastr';
@@ -6,6 +7,7 @@ import { NotificationService } from './notification.service';
 import { Notification } from '../models/notification';
 import { v4 as uuidv4 } from 'uuid';
 import { environment } from 'environments/environment';
+import { TableService2ItemService } from './table-service2-item.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +21,8 @@ export class SignalrService {
 
   constructor(
     private toastr: ToastrService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private tableService2ItemService: TableService2ItemService
   ) { }
 
   startConnection = () => {
@@ -46,18 +49,24 @@ export class SignalrService {
       .catch(err => console.log('Error while starting connection: ' + err));
   }
 
-askServer = () => {
+  askServer = () => {
     this.hubConnection.invoke('askServer','hola')
     .catch(err => console.error(err));
   }
 
   startReceiveMessage = () => {
     this.hubConnection.on('receiveMessage', (message) => {
-      this.toastr.success(message);
+      if (message.includes('refreshorder')) {
+        this.tableService2ItemService.refrestInProgressItems(environment.tenantId);
 
-      let notification = new Notification(uuidv4(), 'Some title', message, new Date(), 'Some type', false);
+      } else {
+        this.toastr.success(message);
 
-      this.notificationService.saveNotificationToStorage(notification);
+        let notification = new Notification(uuidv4(), 'Some title', message, new Date(), 'Some type', false);
+
+        this.notificationService.saveNotificationToStorage(notification);
+      }
+      
     });
   }
 
