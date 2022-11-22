@@ -74,7 +74,6 @@ export class PedidosComponent implements OnInit {
         if(this.cocinaLogin)
         {
           this.cocinaList = this.cocinaList.filter(c => c.id == this.cocinaLogin);
-          console.log(this.cocinaList);
         };
       });
   }
