@@ -79,7 +79,8 @@ export class MesaComponent implements OnInit {
               shapeId: [item.shapeId],
               stateId: [item.stateId],
               posX: [item.posX],
-              posY: [item.posY]
+              posY: [item.posY],
+              userId : [item.userId]
             }));
           });
         }
@@ -99,7 +100,8 @@ export class MesaComponent implements OnInit {
       shapeId: [1],
       stateId: [1],
       posX: [1],
-      posY: [1]
+      posY: [1],
+      userId: [null]
     }));
   }
 
