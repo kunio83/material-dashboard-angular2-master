@@ -48,7 +48,7 @@ export class ServiciosComponent implements OnInit {
     this.serviceStateService.getTableServiceStates().subscribe(
       res => { this.serviceStateList = res as []; });
 
-    this.itemStateService.getItemStates().subscribe(
+    this.itemStateService.getItemStates2().subscribe(
       res => { this.itemStateList = res as []; });
 
 
@@ -127,6 +127,7 @@ export class ServiciosComponent implements OnInit {
   }
 
   detalleServicio(servId: number) {
+    console.log(this.serviceStateList);
     this.selectedService = this.tableServiceList.find(x => x.id == servId);
     this.itemForms = this.fb.array([]);
     //this.orderTotal = 0;

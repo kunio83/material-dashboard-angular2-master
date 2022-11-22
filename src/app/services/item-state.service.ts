@@ -20,4 +20,10 @@ export class ItemStateService {
   getItemStates(): Observable<[]>{
     return this.itemStatebehaviorSubject.asObservable();
   }
+
+  getItemStates2(){
+    return this.httpClient.get(environment.apiBaseURI + 'ItemState');
+  }
+
+ 
 }
