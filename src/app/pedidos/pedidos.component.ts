@@ -1,3 +1,4 @@
+import { Table } from './../models/table';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
 import { TableService2Item } from 'app/models/tablesService2Item';
@@ -97,6 +98,11 @@ export class PedidosComponent implements OnInit {
         this.signalRService.sendNotificationByAppName('refreshorder', 'optirest-comensal');
 
         this.notification = { class: 'text-success', message: 'Pedido actualizado' };
+
+        if (itemStateId == 3) {
+          this.signalRService.sendNotificationByAppName('Pedido: ' + pedido.item.summary + ' para mesa ' + pedido.tableService.tableId + ' listo', 'optirest-mozo')  ;
+        }
+
         setTimeout(() => this.notification = null, 4000);
       }
     );
