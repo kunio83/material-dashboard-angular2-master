@@ -7,18 +7,22 @@
           </div>
           <div class="card-body">
               <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                       <h4 class="card-title">Notificaciones</h4>
                       <div class="alert alert-info alert-with-icon " data-notify="container" *ngFor="let notification of notifications" [class.readed]="notification.readed" [class.unreaded]="!notification.readed" (click)="setNotificationReaded(notification)">
-                          <i class="material-icons" data-notify="icon" [hidden]="notification.readed">add_alert</i>
+                          <span class="material-symbols-outlined" [hidden]="notification.readed" style= "position: left;">
+                            notifications_active
+                            </span>
                           <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                              <i class="material-icons" (click)="deleteNotification(notification)">close</i>
+                              <span class="material-symbols-outlined" (click)="deleteNotification(notification)" style="color:white ;">
+                                task_alt
+                                </span>
                           </button>
                           <p>{{ notification.date | date:'hh:mm:ss dd/MM/yy' }}</p>
                           <span data-notify="message">{{ notification.description }}</span>
                       </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                   </div>
               </div>
           </div>

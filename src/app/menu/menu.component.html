@@ -37,7 +37,7 @@
                                             <ng-container *ngIf="itemForms.controls[i-1].get('itemCategoryId').value != fg.get('itemCategoryId').value">
                                                 <ng-container *ngFor="let cat of categoryList">
                                                     <ng-container *ngIf="cat.id == fg.get('itemCategoryId').value">
-                                                        <td colspan="9" style="padding: 5px;">
+                                                        <td colspan="9" style="padding: 5px; vertical-align: middle !important;">
                                                             <div class="titCategory">
                                                                 {{ cat.name }}
                                                             </div>
@@ -63,16 +63,20 @@
                                                     </div>
                                                 </fieldset>
                                         </div>
-                                        <div class="form-group">
-                                            <input type="text" 
-                                            class="form-control" 
-                                            formControlName="code"
-                                            placeholder="Codigo"
-                                            [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')"
-                                            [class.is-danger] = "fg.get('code').errors && fg.get('code').invalid">
-                                            <p class="help is-danger" *ngIf="fg.get('code').errors && fg.get('code').invalid">
-                                                <a class="rojito">El codigo es requerido</a>
-                                        </div> 
+                                        <div class="td">
+                                            <div class="control">
+                                                <div class="form-group">
+                                                    <input type="text" 
+                                                    class="form-control" 
+                                                    formControlName="code"
+                                                    placeholder="Codigo"
+                                                    [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')"
+                                                    [class.is-danger] = "fg.get('code').errors && fg.get('code').invalid">
+                                                    <p class="help is-danger" *ngIf="fg.get('code').errors && fg.get('code').invalid">
+                                                        <a class="rojito">El codigo es requerido</a>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="td">
                                             <div class="control">
                                             <select class="form-control" 
