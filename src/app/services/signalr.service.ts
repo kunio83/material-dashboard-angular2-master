@@ -13,7 +13,7 @@ import { TableService2ItemService } from './table-service2-item.service';
   providedIn: 'root'
 })
 export class SignalrService {
-  appName: string = 'optirest-admin';
+  appName: string = 'optirest-cocina';
   appGuid: string;
   hubConnection: signalR.HubConnection;
   private appsConnectedBehaviorSubject: BehaviorSubject<any> = new BehaviorSubject<any>([]);
@@ -87,7 +87,7 @@ export class SignalrService {
   // }
 
   sendNotificationByAppName = (message: string, appName: string) => {
-    this.hubConnection.invoke('sendMessageByAppName', message, 'optirest-comensal')
+    this.hubConnection.invoke('sendMessageByAppName', message, appName)
       .catch(err => console.error(err));
   }
 
