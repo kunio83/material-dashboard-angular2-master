@@ -48,38 +48,31 @@
                                         </ng-container>
                                     <form class="tr" [formGroup]="fg" (submit)="recordSubmit(fg)">
                                         <div class="td">
-                                            <div class="form-group">
-                                                <input type="text" 
-                                                class="form-control" 
-                                                formControlName="code"
-                                                placeholder="Codigo"
-                                                [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')"
-                                                [class.is-danger] = "fg.get('code').errors && fg.get('code').invalid">
-                                            </div>                                            
-                                            <p class="help is-danger" *ngIf="fg.get('code').errors && fg.get('code').invalid">
-                                                <a class="rojito">El codigo es requerido</a>
                                                 <fieldset>
                                                     {{imageError}}
                                                     <div class="custom-file fileInputProfileWrap">
                                                         <input type="file" (change)="fileChangeEvent($event, fg)" class="fileInputProfile">
                                                         <div class="img-space">
-                                    
                                                             <ng-container *ngIf="fg.get('picture').value != ''; else elseTemplate">
                                                                 <img [src]="fg.get('picture').value" />
                                                             </ng-container>
                                                             <ng-template #elseTemplate>
                                                                 <img src="./assets/img/placeholder.png" class="img-responsive">
                                                             </ng-template>
-                                    
-                                                        </div>
-                                    
+                                                        </div>          
                                                     </div>
                                                 </fieldset>
                                         </div>
-                                        <div class="td">
-                                            <input class="form-control" formControlName="code"
-                                            [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')">
-                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" 
+                                            class="form-control" 
+                                            formControlName="code"
+                                            placeholder="Codigo"
+                                            [ngClass]="(fg.get('active').value == 0 ? 'controlInactive':'')"
+                                            [class.is-danger] = "fg.get('code').errors && fg.get('code').invalid">
+                                            <p class="help is-danger" *ngIf="fg.get('code').errors && fg.get('code').invalid">
+                                                <a class="rojito">El codigo es requerido</a>
+                                        </div> 
                                         <div class="td">
                                             <div class="control">
                                             <select class="form-control" 
