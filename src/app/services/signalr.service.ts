@@ -13,7 +13,7 @@ import { TableService2ItemService } from './table-service2-item.service';
   providedIn: 'root'
 })
 export class SignalrService {
-  appName: string = 'optirest-admin';
+  appName: string = 'optirest-cocina';
   appGuid: string;
   hubConnection: signalR.HubConnection;
   private appsConnectedBehaviorSubject: BehaviorSubject<any> = new BehaviorSubject<any>([]);
