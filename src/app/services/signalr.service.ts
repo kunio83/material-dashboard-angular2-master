@@ -36,22 +36,9 @@ export class SignalrService {
     this.hubConnection
       .start()
       .then(() => {
-        if (localStorage.getItem('appGuid') != null) {
-          this.appGuid = localStorage.getItem('appGuid') ?? '';
-        }
-        else {
-          this.appGuid = uuidv4();
-          localStorage.setItem('appGuid', this.appGuid);
-        }
-
         this.updateAppsConnected();
       })
       .catch(err => console.log('Error while starting connection: ' + err));
-  }
-
-  askServer = () => {
-    this.hubConnection.invoke('askServer','hola')
-    .catch(err => console.error(err));
   }
 
   startReceiveMessage = () => {
@@ -71,7 +58,7 @@ export class SignalrService {
   }
 
   updateAppsConnected = () => {
-      this.hubConnection.invoke('SetConnectionId', this.appGuid, this.appName, '0').then(() => {
+      this.hubConnection.invoke('SetConnectionId', this.appName).then(() => {
         this.hubConnection.invoke('GetAppIds').then((appIds) => {
           console.log('appIds:-->', appIds);
           this.appsConnectedBehaviorSubject.next(appIds);
@@ -87,9 +74,9 @@ export class SignalrService {
   // }
 
   sendNotificationByAppName = (message: string, appName: string) => {
-    this.hubConnection.invoke('sendMessageByAppName', message, appName)
-      .catch(err => console.error(err));
-  }
+      this.hubConnection.invoke('sendMessageByAppName', message, appName)
+        .catch(err => console.error(err));
+    }
 
   sendNotificationByAppGuid = (message: string, appGuid: string) => {
     let connectionId: string = this.appsConnectedBehaviorSubject.getValue().find(q => q.appGuid == appGuid)?.notificationAppData.connectionId ?? '';
